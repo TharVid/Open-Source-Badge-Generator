@@ -87,6 +87,8 @@ body{
   justify-content: center;
   padding:50px 20px;
   box-sizing: border-box;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
   background:radial-gradient(circle,rgba(147,146,146,1) 0%, rgba(0,0,0,1) 100%);
   color:#fff;
   h1{

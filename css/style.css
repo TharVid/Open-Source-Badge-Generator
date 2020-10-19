@@ -295,7 +295,7 @@ body {
   position: absolute;
   color: #FFFFFF;
   text-align: center;
-  line-height: 40px;
+  line-height: 50px;
   -webkit-transform: translate3d(0, 0, 0);
   transform: translate3d(0, 0, 0);
   -webkit-transition: -webkit-transform ease-out 200ms;
@@ -317,7 +317,7 @@ body {
   height: 18px;
   text-align: center;
   box-sizing: border-box;
-  font-size: 13px;
+  font-size: 18px;
 }
 
 .share-icon {

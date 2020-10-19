@@ -4,9 +4,9 @@
   font-family: "Roboto";
 }
 
-body {
-  background-color: #eee;
+html {
   background: radial-gradient(circle, #939292 0%, black 100%);
+  height: 100%;
 }
 
 .container {

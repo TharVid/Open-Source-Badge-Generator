@@ -313,11 +313,11 @@ body {
   position: absolute;
   left: 0;
   right: 0;
-  width: 30px;
-  height: 30px;
+  width: 18px;
+  height: 18px;
   text-align: center;
   box-sizing: border-box;
-  font-size: 13px;
+  font-size: 15px;
 }
 
 .share-icon {

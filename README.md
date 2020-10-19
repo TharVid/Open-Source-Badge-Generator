@@ -11,3 +11,4 @@ Here's how you can use it:
 	<br>
 4. Click on the **Click to download** button to download your badge.
 5. Congratuations! You're done.
+6. You can now share your badge with the world on your social media platforms.

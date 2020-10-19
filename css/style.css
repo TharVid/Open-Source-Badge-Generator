@@ -289,13 +289,13 @@ body {
 .menu-open-button {
   background: #EEEEEE;
   border-radius: 100%;
-  width: 18px;
-  height: 18px;
+  width: 20px;
+  height: 20px;
   margin-left: -40px;
   position: absolute;
   color: #FFFFFF;
   text-align: center;
-  line-height: 30px;
+  line-height: 40px;
   -webkit-transform: translate3d(0, 0, 0);
   transform: translate3d(0, 0, 0);
   -webkit-transition: -webkit-transform ease-out 200ms;
@@ -317,7 +317,7 @@ body {
   height: 18px;
   text-align: center;
   box-sizing: border-box;
-  font-size: 16px;
+  font-size: 13px;
 }
 
 .share-icon {

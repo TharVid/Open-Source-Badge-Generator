@@ -62,10 +62,10 @@ function fetchUser() {
 }
 
 // downloads screenshot to local computer
-document.querySelector(".download-button").addEventListener("click",function() {
-    html2canvas(document.querySelector(".container"),{useCORS:true}).then(function(canvas) {
+document.querySelector(".download_button").addEventListener("click",function() {
+    html2canvas(document.querySelector(".row"),{useCORS:true}).then(function(canvas) {
         console.log(canvas);
-        saveAs(canvas.toDataURL(),'screenshot.png');
+        saveAs(canvas.toDataURL(),'Badge.png');
     });
 });
 

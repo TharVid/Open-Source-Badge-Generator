@@ -122,7 +122,7 @@ body {
   width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
-
+  border-radius: 5px;
   display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
@@ -131,16 +131,24 @@ body {
   -webkit-box-pack: center;
   -ms-flex-pack: center;
   justify-content: center;
-  padding: 50px 20px;
+  padding: 30px 20px;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
   background: radial-gradient(circle, #939292 0%, black 100%);
   color: #fff;
+  text-align: center;
 }
 
 .repo h1 {
   font-size: 20px;
   margin-bottom: 15px;
+}
+.repo h2 {
+  top: 0;
+  margin-top: 10px;
+  color: rgb(243, 88, 88);
+  margin-bottom: 10px;
+  text-transform: none;
 }
 
 .repo .repo_details {
@@ -267,7 +275,24 @@ body {
   font-family: Roboto;
   font-size: 15px;
   font-weight: bold;
-  padding: 6px 24px;
   text-decoration: none;
   text-shadow: 0px 1px 0px #ffffff;
+  width: fit-content;
+}
+.download {
+  padding: 7px 12px;
+  border-radius: 5px;
+  border: none;
+}
+.download:hover {
+  color: white;
+  background-color: cornflowerblue;
+  font-weight: 500;
+}
+.followers_ {
+  width: 100%;
+}
+.followers_ p {
+  margin-top: 5px;
+  font-weight: 600;
 }

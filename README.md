@@ -19,10 +19,11 @@ Here's how you can use it:
 ```
 git remote add upstream  https://github.com/TharVid/Open-Source-Badge-Generator.git
 ```
+s
 4. Update or Add the feature in the code-base.
 5. Then at Final use this commond
 ```
 git pull upstream master
 ```
-6. Make a P.R on local repo
 
+6. Make a P.R on local repos

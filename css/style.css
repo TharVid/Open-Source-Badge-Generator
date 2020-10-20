@@ -24,7 +24,7 @@ html {
   -webkit-box-direction: normal;
   -ms-flex-direction: column;
   flex-direction: column;
-  margin-top: 100px;
+  margin-top: 50px;
 }
 
 .container .row {
@@ -281,7 +281,12 @@ html {
         font-size: 15px;
         font-weight: bolder;
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        margin-top: 20px;
         }
         button:hover{
         background-color: rgb(14,118,217);
+}
+
+.share {
+  margin-top: 40px;
 }

@@ -286,6 +286,7 @@ html {
 }
 
 .share {
+  display: flex;
   margin-top: 30px;
   padding:5px;
 }

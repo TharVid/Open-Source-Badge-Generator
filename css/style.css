@@ -289,4 +289,5 @@ html {
 
 .share {
   margin-top: 40px;
+  display: flex;
 }

@@ -83,9 +83,6 @@ html {
 
 .follow {
   width: 100%;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
   -webkit-box-pack: justify;
   -ms-flex-pack: justify;
   justify-content: space-between;
@@ -241,8 +238,8 @@ html {
   font-weight: bold;
   padding: 6px 24px;
   text-decoration: none;
-  text-shadow: 0px 1px 0px #ffffff; }
-
+  text-shadow: 0px 1px 0px #ffffff;
+  }
 .download {
   background-color: #000;
   border: none;
@@ -260,7 +257,10 @@ button:hover {
 
 .share {
   margin-top: 30px;
-  padding: 5px; }
+  padding: 5px;
+  display: flex;
+  flex-direction: row;
+}
 
 @media (max-width: 800px) {
   .container .row {

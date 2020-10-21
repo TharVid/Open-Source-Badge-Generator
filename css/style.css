@@ -23,7 +23,7 @@ html {
   -ms-flex-direction: column;
   flex-direction: column;
   margin: auto;
-  padding-top: 50px; }
+  padding-top: 40px; }
 
 .container .row {
   display: -webkit-box;
@@ -257,6 +257,7 @@ button:hover {
 
 .share {
   margin-top: 30px;
+  margin-bottom: 55px;
   padding: 5px;
   display: flex;
   flex-direction: row;
@@ -274,3 +275,34 @@ button:hover {
     font-size: 13px; } }
 
 /*# sourceMappingURL=style.css.map */
+
+.bottom_bar {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #350035;
+  color: white;
+  text-align: center;
+  display: inline-block;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.bottom_bar_left {
+  float: left;
+  padding-left: 20px;
+}
+
+.bottom_bar_right {
+  float: right;
+  padding-right: 20px;
+}
+
+input[type="color"] {
+	-webkit-appearance: none;
+  background-color: #350035;
+}
+input[type="color"]::-webkit-color-swatch {
+	border: none;
+}

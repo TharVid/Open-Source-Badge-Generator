@@ -25,7 +25,7 @@
         <!-- corresponds to box containing main information -->
         <div class="row">
             <!-- username and badge generator on left side -->
-            <div class="user_info">
+            <div id="user_info" class="user_info">
                 <div class="user_img">
                     <img src="images/github_logo.png">
                 </div>
@@ -43,7 +43,7 @@
             </div>
 
             <!-- displays text on right side -->
-            <div class="repo">
+            <div id="repo" class="repo">
                 <h2 align="center"><i> Open Source Contributor</i></h2>
                 <h1>
                     <div class="item followe">
@@ -92,10 +92,21 @@
 
     </div>
 
-    <!-- author credits -->
-    <div align="center" style="padding-top: 20px;">
-        <p style="color:black; ">Made With <i class="fa fa-heart" style="font-size:18px;color:red"></i>
-            By <i class="fa fa-github" style="font-size:18px"></i><a style="text-decoration: none;" href="https://github.com/TharVid">TharVid</a></p>
+    <div class="bottom_bar">
+        <div class="bottom_bar_left">
+          Profile Area:
+          <input type="color" id="profile_area_color" name="profile_area_color" value="#ffffff" onchange="changeColor();">
+          Profile Text:
+          <input type="color" id="profile_text_color" name="profile_text_color" value="#000000" onchange="changeColor();">
+          Message Area:
+          <input type="color" id="message_area_color" name="message_area_color" value="#350035" onchange="changeColor();">
+          Message Text:
+          <input type="color" id="message_text_color" name="message_text_color" value="#ffffff" onchange="changeColor();">
+        </div>
+        <div class="bottom_bar_right">
+            <p style="color:white; ">Made With <i class="fa fa-heart" style="font-size:18px;color:red"></i>
+                By <i class="fa fa-github" style="font-size:18px; color: white;"></i><a style="text-decoration: none; color: white;" href="https://github.com/TharVid">TharVid</a></p>
+        </div>
     </div>
 
     <!-- embed client-side script -->

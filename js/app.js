@@ -20,7 +20,7 @@ function inputFunction() {
         document.querySelector(".input_user").value = "";
         document.querySelector(".input_user").focus();
         return false;
-    } 
+    }
     //if username is valid, call fetchUser()
     else {
         user_name = input_user.split("").join("");
@@ -36,7 +36,7 @@ btn_submit.addEventListener("click", function () {
     inputFunction()
 });
 
-//if user presses enter it should submit 
+//if user presses enter it should submit
 document.querySelector(".input_user").addEventListener("keyup", function (e) {
     if (e.keyCode === 13) {
         //alert("you have pressed enter key");
@@ -51,7 +51,7 @@ function fetchUser() {
         if (data.message === "Not Found") {
             alert("user not found");
             return false;
-        } 
+        }
         else {
             user_img.innerHTML = `<img src="${data.avatar_url}">`;
             userName.innerHTML = data.login;
@@ -88,4 +88,15 @@ function saveAs(uri, filename) {
     } else {
         window.open(uri);
     }
+}
+
+function changeColor(){
+    var profileAreaColor = document.getElementById('profile_area_color').value;
+    var profileTextColor = document.getElementById('profile_text_color').value;
+    var messageAreaColor = document.getElementById('message_area_color').value;
+    var messageTextColor = document.getElementById('message_text_color').value;
+    document.getElementById('user_info').style.background = profileAreaColor;
+    document.getElementById('user_info').style.color = profileTextColor;
+    document.getElementById('repo').style.background = messageAreaColor;
+    document.getElementById('repo').style.color = messageTextColor;
 }

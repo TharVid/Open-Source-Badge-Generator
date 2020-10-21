@@ -4,9 +4,9 @@
   font-family: "Roboto";
 }
 
-body {
-  background-color: #eee;
+html {
   background: radial-gradient(circle, #939292 0%, black 100%);
+  height: 100%;
 }
 
 .container {
@@ -24,7 +24,7 @@ body {
   -webkit-box-direction: normal;
   -ms-flex-direction: column;
   flex-direction: column;
-  margin-top: 100px;
+  margin-top: 50px;
 }
 
 .container .row {
@@ -95,9 +95,6 @@ body {
 
 .follow {
   width: 100%;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
   -webkit-box-pack: justify;
   -ms-flex-pack: justify;
   justify-content: space-between;
@@ -276,12 +273,53 @@ body {
         background-color: #000;
         border: none;
         color: white;
-        padding: 5px 10px;
+        padding: 10px 10px;
         cursor: pointer;
         font-size: 15px;
         font-weight: bolder;
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        margin-top: 50px;
+        border-radius: 4px;
         }
         button:hover{
         background-color: rgb(14,118,217);
 }
+
+.share {
+  display: flex;
+  margin-top: 30px;
+  padding:5px;
+}
+
+
+.icon-bar {
+  position: fixed;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+/* Style the icon bar links */
+.icon-bar a {
+  display: block;
+  text-align: center;
+  padding: 16px;
+  transition: all 0.3s ease;
+  color: white;
+  font-size: 20px;
+}
+
+/* Style the social media icons with color, if you want */
+.icon-bar a:hover {
+  background-color: #000;
+}
+
+
+
+
+.linkedin {
+  background: #007bb5;
+  color: white;
+}
+

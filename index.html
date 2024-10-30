@@ -10,100 +10,80 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            text-align: center;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .user_img img {
+            width: 100px;
+            height: 100px;
+        }
+        .user_name h1, .user_name h3 {
+            margin: 10px 0;
+        }
+        .follow p {
+            margin: 5px 0;
+        }
+        .repo h2, .repo p {
+            margin: 10px 0;
+        }
+        .download_button, .share {
+            margin-top: 20px;
+        }
+    </style>
 </head>
 
 <body>
-    <div class="icon-bar">
-        <a href="http://www.linkedin.com/shareArticle?mini=true&amp;url=https://tharvid.github.io/Open-Source-Badge-Generator/" class="linkedin"><i class="fa fa-linkedin"></i></a>
-        
-      </div>
-    <!--takes user input (github username) and generates a badge-->
     <div class="container">
-        <!-- section for users to enter github username -->
-        <div class="input_wrapper">
-            <input type="text" placeholder="Enter GitHub Username to generate your badge" class="input_user">
-            <div class="btn_submit">Generate Badge</div>
+        <div class="user_img">
+            <img src="images/github_logo.png" alt="GitHub Logo">
         </div>
-
-        <!-- corresponds to box containing main information -->
-        <div class="row">
-            <!-- username and badge generator on left side -->
-            <div class="user_info">
-                <div class="user_img">
-                    <img src="images/github_logo.png">
-                </div>
-                <div class="user_name">
-                    <h3>Open Source Contributor</h3>
-                    <h1>GitHub</h1>
-                </div>
-
-                <div class="follow">
-                    <div class="item followers_">
-                        <span>Bio Here</span>
-                        <p>#proudcontributor</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- displays text on right side -->
-            <div class="repo">
-                <h2 align="center"><i> Open Source Contributor</i></h2>
-                <h1>
-                    <div class="item followe">
-                        Dear <span>User</span>,
-                    </div>
-                    <p align="justify">We, all the developers in the universe would like to thank you for all your
-                        contribution to open source.
-                        The world is powered by open source and your contribution will help millions of developers. Keep
-                        contributing to a better internet.</br>
-                        Thank You!</br> </br> Anonymous Developer From Wakanda!</p>
-                </h1>
-            </div>
+        <div class="user_name">
+            <h3>Open Source Contributor</h3>
+            <h1>GitHub</h1>
         </div>
-
-        <!-- Download Button to download your badge-->
+        <div class="follow">
+            <p>Bio Here</p>
+            <p>#proudcontributor</p>
+        </div>
+        <div class="repo">
+            <h2>Open Source Contributor</h2>
+            <p>Dear User,</p>
+            <p>We, all the developers in the universe, would like to thank you for all your contributions to open source. The world is powered by open source, and your contributions help millions of developers. Keep contributing to a better internet.</p>
+            <p>Thank You!</p>
+            <p>Anonymous Developer From Wakanda!</p>
+        </div>
         <div class="download_button">
-            <button class="download" type="download"><i class="fa fa-download"></i> Download Badge</button>
+            <button class="download" type="button"><i class="fa fa-download"></i> Download Badge</button>
         </div>
-
-
-        
         <div class="share">
-            <!-- Share on Facebook Button -->
-            <div class="fb-share-button" data-href="https://tharvid.github.io/Open-Source-Badge-Generator/"
-                data-layout="button" data-size="large"><a target="_blank"
-                    href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Ftharvid.github.io%2FOpen-Source-Badge-Generator%2F&amp;src=sdkpreparse"
-                    class="fb-xfbml-parse-ignore">Share</a></div>
-
-                    <a 
-            class="twitter-share-button" 
-            href="https://twitter.com/intent/tweet?hashtags=proudcontributor &amp;text=Generate%20Badge%20GitHub%20on .."
-            data-size="large"
-            >
-            Share Twitter
-        </a>
+            <div class="fb-share-button" data-href="https://tharvid.github.io/Open-Source-Badge-Generator/" data-layout="button" data-size="large">
+                <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Ftharvid.github.io%2FOpen-Source-Badge-Generator%2F&src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a>
+            </div>
+            <a class="twitter-share-button" href="https://twitter.com/intent/tweet?hashtags=proudcontributor&text=Generate%20Badge%20GitHub%20on%20.." data-size="large">Share Twitter</a>
         </div>
-
-        
-
-        
     </div>
-
-    <!-- author credits -->
     <div align="center" style="padding-top: 20px;">
-        <p style="color:white; ">Made With <i class="fa fa-heart" style="font-size:18px;color:red"></i>
-            By <i class="fa fa-github" style="font-size:18px"></i><a href="https://github.com/TharVid">TharVid</a></p>
+        <p>Made With <i class="fa fa-heart" style="font-size:18px;color:red"></i> By <i class="fa fa-github" style="font-size:18px"></i><a href="https://github.com/TharVid">TharVid</a></p>
     </div>
-
-    <!-- embed client-side script -->
     <script src="js/app.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script type="text/javascript" src="js/html2canvas.js"></script>
-
-    <!-- Facebook SKD -->
     <div id="fb-root"></div>
-    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v8.0"
-        nonce="qrh32Ait"></script>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v8.0" nonce="qrh32Ait"></script>
 </body>
 
 </html>

@@ -2,361 +2,385 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Open Source Badge — TharVid</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Open Source Badge — GitHub</title>
 
-  <!-- Fonts & Icons -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700;800&family=Rubik:wght@500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <!-- Fonts + icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&family=Rubik:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer"/>
 
-  <!-- Tiny reset + styles -->
   <style>
     :root{
-      --bg1: #0f172a;
-      --accent: #ff6f61;
-      --accent-2: #7c2ae8;
-      --card-bg: rgba(255,255,255,0.95);
-      --muted: #5b6270;
-      --glass: rgba(255,255,255,0.06);
-      --radius: 16px;
-      --shadow: 0 10px 30px rgba(2,6,23,0.45);
-      --max-w: 920px;
-      --container-pad: 28px;
+      --bg:#081026;
+      --card:#fff;
+      --accent1:#ff6f61;
+      --accent2:#7c2ae8;
+      --muted:#64718a;
+      --radius:14px;
+      --shadow:0 12px 30px rgba(2,6,23,0.35);
     }
-
-    html,body{height:100%;}
+    html,body {height:100%}
     body{
       margin:0;
-      font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-      background: radial-gradient(1200px 600px at 10% 10%, rgba(124,42,232,0.18), transparent 10%),
-                  linear-gradient(180deg, #06061b 0%, #071030 55%, #071935 100%);
-      color:#0b1220;
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
+      font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background: linear-gradient(180deg,#041028 0%, #071032 60%);
       display:flex;
       align-items:center;
       justify-content:center;
-      padding:40px 20px;
+      padding:28px;
+      color:#0b1220;
     }
 
-    .page {
+    .layout {
       width:100%;
-      max-width:var(--max-w);
+      max-width:980px;
       display:grid;
-      grid-template-columns: 420px 1fr;
-      gap:28px;
+      grid-template-columns: 380px 1fr;
+      gap:22px;
       align-items:start;
     }
 
-    /* Card / Badge preview */
-    .badge-card{
-      background: linear-gradient(180deg, rgba(255,255,255,0.96), rgba(255,255,255,0.92));
-      border-radius:var(--radius);
-      padding:20px;
-      box-shadow:var(--shadow);
-      border:1px solid rgba(255,255,255,0.06);
-      display:flex;
-      flex-direction:column;
-      align-items:center;
+    /* Left: controls */
+    .panel {
+      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+      border-radius: var(--radius);
+      padding:18px;
+      box-shadow: var(--shadow);
+      color:#e6eefc;
+      border:1px solid rgba(255,255,255,0.03);
     }
+    .brand {
+      display:flex;gap:12px;align-items:center;margin-bottom:12px;
+    }
+    .brand .logo {
+      width:44px;height:44px;border-radius:10px;
+      background:linear-gradient(90deg,var(--accent1),var(--accent2));
+      display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-family:Rubik;
+      box-shadow:0 6px 18px rgba(12,18,40,0.18)
+    }
+    h1{font-size:1.05rem;margin:0}
+    p.subtitle{margin:2px 0 12px;color:#cfe0ff;font-size:0.87rem}
 
-    .badge-preview {
-      width:100%;
-      max-width:360px;
-      background: linear-gradient(135deg, rgba(124,42,232,0.06), rgba(255,111,97,0.02));
-      border-radius:14px;
-      padding:26px;
-      text-align:center;
-      box-shadow: 0 6px 22px rgba(2,6,23,0.12);
+    label {display:block;font-size:0.86rem;margin-top:10px;margin-bottom:6px;color:#cfe0ff}
+    .input-row{display:flex;gap:8px}
+    input[type="text"]{
+      flex:1;padding:10px 12px;border-radius:10px;border:1px solid rgba(255,255,255,0.06);
+      background:transparent;color:white;font-size:0.95rem;outline:none;
+    }
+    button.btn {
+      padding:10px 12px;border-radius:10px;border:0;cursor:pointer;font-weight:700;
+    }
+    .btn.primary { background: linear-gradient(90deg,var(--accent1),var(--accent2)); color:white; }
+    .btn.ghost { background:transparent;color:#cfe0ff;border:1px solid rgba(255,255,255,0.06); }
+
+    .help { font-size:0.85rem;color:var(--muted); margin-top:12px }
+
+    .share-links { margin-top:14px; display:flex; gap:8px; align-items:center; flex-wrap:wrap }
+    .share-links a { color:#e6eefc;text-decoration:none;border-radius:8px;padding:8px 10px;border:1px solid rgba(255,255,255,0.04) }
+
+    /* Right: badge preview */
+    .preview-card {
+      border-radius: var(--radius);
+      background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(255,255,255,0.94));
+      padding:20px;
+      box-shadow: 0 12px 40px rgba(2,6,23,0.18);
+      max-width:100%;
+    }
+    .badge {
+      display:flex;flex-direction:column;align-items:center;text-align:center;padding:18px;border-radius:12px;
+      background: linear-gradient(135deg, rgba(124,42,232,0.03), rgba(255,111,97,0.02));
     }
 
     .avatar {
-      width:112px;height:112px;border-radius:50%;
-      border:4px solid white;
-      background:linear-gradient(135deg,var(--accent),var(--accent-2));
-      display:inline-flex;align-items:center;justify-content:center;
-      color:white;font-weight:800;font-family:"Rubik",sans-serif;font-size:34px;
-      box-shadow: 0 6px 18px rgba(12,18,40,0.18);
+      width:110px;height:110px;border-radius:50%;overflow:hidden;border:4px solid white;box-shadow:0 8px 24px rgba(2,6,23,0.09);
+      display:inline-block;background:#eef;object-fit:cover;
     }
+    .role { color:var(--accent1);font-weight:700;margin-top:12px;font-size:0.95rem; letter-spacing:0.4px }
+    .display-name { font-family:Rubik, sans-serif;font-size:1.8rem;margin:8px 0;color:#141432 }
+    .bio { color:var(--muted);max-width:720px;line-height:1.4 }
 
-    .role {
-      font-size:0.92rem;color:var(--accent);font-weight:700;margin-top:12px;
-      letter-spacing:0.6px;
-    }
-    .name {
-      font-family:"Rubik",sans-serif;font-size:1.8rem;margin:8px 0 6px;color:#141432;
-    }
-    .bio {
-      color:var(--muted);font-size:0.975rem;line-height:1.45;margin-top:10px;padding:0 6px;
-    }
+    .stats { display:flex;gap:10px;margin-top:14px;flex-wrap:wrap; justify-content:center }
+    .stat { background:white;padding:8px 12px;border-radius:10px;font-weight:700; color:#0b1220; box-shadow: 0 6px 18px rgba(2,6,23,0.06) }
 
-    .stats {
-      display:flex;gap:10px;justify-content:center;margin-top:16px;
+    .repos {
+      margin-top:18px; width:100%;
     }
-    .stat {
-      background:rgba(255,255,255,0.6);
-      border-radius:10px;padding:8px 12px;font-weight:600;font-size:0.95rem;color:#111;
-      box-shadow: 0 4px 12px rgba(2,6,23,0.04);
+    .repo-item {
+      display:flex;justify-content:space-between;align-items:flex-start;padding:10px;border-radius:10px;border:1px dashed rgba(0,0,0,0.04);margin-bottom:8px;background:rgba(0,0,0,0.01)
     }
+    .repo-left { text-align:left; max-width:72% }
+    .repo-left a { font-weight:700;color:#141432;text-decoration:none }
+    .repo-desc { color:var(--muted);font-size:0.92rem;margin-top:6px }
+    .repo-meta { color:var(--muted); font-size:0.88rem;margin-top:8px }
 
-    /* Controls panel */
-    .controls {
-      background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
-      border-radius:var(--radius);
-      padding:22px;
-      box-shadow: 0 8px 28px rgba(2,6,23,0.22);
-      color: #e6eefc;
-      border: 1px solid rgba(255,255,255,0.04);
-      min-height:320px;
-    }
+    .small-note { color:var(--muted); font-size:0.85rem;margin-top:8px }
 
-    .brand {
-      display:flex;align-items:center;gap:12px;margin-bottom:12px;
-    }
-    .brand h1{margin:0;font-size:1.1rem;color:#fff;font-family:"Rubik",sans-serif;}
-    .brand p{margin:0;color:#bcd0ff;font-size:0.85rem}
+    /* loading / error */
+    .loading { color:var(--muted); font-weight:700; padding:10px; text-align:center }
+    .error { color:#ffbaba;background:#4d0707;padding:10px;border-radius:8px;color:white }
 
-    label{display:block;font-size:0.85rem;color:#cfe0ff;margin-top:12px;margin-bottom:6px}
-    input[type="text"], textarea {
-      width:100%;padding:10px 12px;border-radius:10px;border:1px solid rgba(255,255,255,0.06);
-      background:transparent;color:#fff;font-size:0.95rem;resize:vertical;
-      outline:none;
+    @media (max-width:880px){
+      .layout { grid-template-columns: 1fr; }
     }
-    textarea{min-height:84px}
-
-    .actions {
-      display:flex;gap:12px;margin-top:18px;flex-wrap:wrap;
-    }
-
-    .btn {
-      display:inline-flex;align-items:center;gap:10px;padding:10px 14px;border-radius:12px;
-      border:0;cursor:pointer;font-weight:700;font-size:0.95rem;
-      box-shadow: 0 6px 22px rgba(2,6,23,0.12);
-    }
-    .btn-download{
-      background: linear-gradient(90deg,var(--accent) 0%, var(--accent-2) 100%); color:white;
-    }
-    .btn-outline{
-      background:transparent;color:#cfe0ff;border:1px solid rgba(255,255,255,0.06);
-    }
-
-    .share-row {margin-top:18px;display:flex;gap:8px;align-items:center;}
-    .share-row a{color:#e6eefc;font-weight:700;text-decoration:none;border-radius:10px;padding:8px 12px;border:1px solid rgba(255,255,255,0.04)}
-    .share-row a:hover{opacity:0.95;transform:translateY(-2px)}
-
-    .footer {
-      margin-top:20px;color:#cfe0ff;font-size:0.86rem;
-    }
-
-    /* small screens */
-    @media (max-width:900px){
-      .page{grid-template-columns: 1fr; padding:0; gap:18px}
-      body{padding:28px 18px}
-      .controls{order:2}
-    }
-
   </style>
 </head>
 <body>
-  <main class="page" aria-labelledby="pageTitle">
-    <!-- LEFT: Badge Preview -->
-    <section class="badge-card" aria-label="Badge preview area">
-      <div id="badge" class="badge-preview" role="img" aria-label="Open source badge">
-        <div class="avatar" id="avatarText" aria-hidden="true">GH</div>
-        <div class="role" id="roleText">Open Source Contributor</div>
-        <div class="name" id="nameText">GitHub</div>
-        <div class="bio" id="bioText">
-          We, all the developers in the universe, thank you for your contributions to open source. Your work powers tools used by millions. Keep contributing!
-        </div>
-
-        <div class="stats" aria-hidden="true">
-          <div class="stat"><i class="fa-solid fa-code-branch"></i> 42 repos</div>
-          <div class="stat"><i class="fa-solid fa-star"></i> 1.2k stars</div>
-          <div class="stat"><i class="fa-solid fa-users"></i> 8.3k followers</div>
+  <main class="layout" role="main" aria-labelledby="pageTitle">
+    <!-- Controls -->
+    <section class="panel" aria-labelledby="controlsTitle">
+      <div class="brand">
+        <div class="logo">OS</div>
+        <div>
+          <h1 id="controlsTitle">Open Source Badge Generator</h1>
+          <p class="subtitle">Enter a GitHub username and create a shareable badge (export PNG).</p>
         </div>
       </div>
 
-      <div style="width:100%;display:flex;gap:10px;margin-top:18px;justify-content:center;flex-wrap:wrap">
-        <button id="downloadBtn" class="btn btn-download" aria-label="Download badge">
-          <i class="fa-solid fa-download"></i> Download Badge
-        </button>
-
-        <a id="previewLink" class="btn btn-outline" href="https://github.com/TharVid" target="_blank" rel="noopener noreferrer">
-          <i class="fa-brands fa-github"></i> View on GitHub
-        </a>
+      <label for="username">GitHub username</label>
+      <div class="input-row">
+        <input id="username" class="input_user" type="text" placeholder="e.g. TharVid" aria-label="GitHub username" />
+        <button id="searchBtn" class="btn primary" title="Search (Enter)">Search</button>
       </div>
 
-      <div class="footer" aria-hidden="true">
-        Made with <i class="fa-solid fa-heart" style="color:#ff6f61;margin:0 6px"></i> by <a href="https://github.com/TharVid" target="_blank" rel="noopener noreferrer" style="color:#e6eefc;text-decoration:underline">TharVid</a>
+      <div style="display:flex;gap:8px;margin-top:10px">
+        <button id="downloadBtn" class="btn ghost" title="Download badge as PNG"><i class="fa fa-download"></i>&nbsp; Download</button>
+        <button id="resetBtn" class="btn ghost" title="Reset">Reset</button>
+      </div>
+
+      <p class="help">Notes: Uses GitHub public API (60 requests/hour per IP for unauthenticated). If you see rate-limit errors try later or use a server-side proxy.</p>
+
+      <div class="share-links" aria-hidden="true">
+        <a id="twitterShare" href="#" target="_blank" rel="noopener noreferrer"><i class="fab fa-twitter"></i> Tweet</a>
+        <a id="fbShare" href="#" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook"></i> Share</a>
+        <a id="githubLink" href="https://github.com/TharVid" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> Creator</a>
       </div>
     </section>
 
-    <!-- RIGHT: Controls -->
-    <aside class="controls" aria-labelledby="controlsHeading">
-      <div class="brand">
-        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <rect x="1" y="1" width="22" height="22" rx="6" fill="url(#g)"/>
-          <defs>
-            <linearGradient id="g" x1="0" x2="1">
-              <stop offset="0" stop-color="#ff6f61"/>
-              <stop offset="1" stop-color="#7c2ae8"/>
-            </linearGradient>
-          </defs>
-        </svg>
-        <div>
-          <h1 id="controlsHeading">Open Source Badge Generator</h1>
-          <p style="margin:0;font-size:0.86rem;color:#bcd0ff">Simple, responsive badge you can download and share.</p>
+    <!-- Preview -->
+    <section class="preview-card" aria-labelledby="previewTitle">
+      <h2 id="previewTitle" style="margin:0 0 10px 0;font-size:1rem;color:#2b2b2b">Badge Preview</h2>
+
+      <div id="badge" class="badge" role="region" aria-live="polite" aria-label="Badge preview">
+        <!-- Avatar -->
+        <img id="avatarImg" class="avatar" src="images/github_logo.png" alt="avatar" />
+
+        <div class="role" id="roleText">Open Source Contributor</div>
+        <div class="display-name" id="nameText">GitHub</div>
+        <div class="bio" id="bioText">Bio here — proud contributor to open source.</div>
+
+        <div class="stats" id="statsRow" aria-hidden="true" style="margin-top:14px">
+          <div class="stat" id="followersStat"><i class="fa fa-users"></i> 0 followers</div>
+          <div class="stat" id="reposStat"><i class="fa fa-book"></i> 0 repos</div>
+          <div class="stat" id="starsStat"><i class="fa fa-star"></i> 0 stars</div>
+        </div>
+
+        <div class="repos" id="repoList" aria-live="polite" style="width:100%;margin-top:16px">
+          <!-- repos inserted here -->
+          <div class="small-note" id="repoNote">No user searched yet — enter a username on the left.</div>
         </div>
       </div>
-
-      <form id="badgeForm" onsubmit="return false;" aria-describedby="formDesc">
-        <div id="formDesc" style="display:none">Controls to edit badge preview text and download as PNG</div>
-
-        <label for="inputName">Display name</label>
-        <input id="inputName" type="text" value="GitHub" maxlength="40" aria-label="Display name">
-
-        <label for="inputRole">Role / Title</label>
-        <input id="inputRole" type="text" value="Open Source Contributor" maxlength="60" aria-label="Role or title">
-
-        <label for="inputBio">Short bio / message</label>
-        <textarea id="inputBio" maxlength="240" aria-label="Short bio">We, all the developers in the universe, thank you for your contributions to open source. Your work powers tools used by millions. Keep contributing!</textarea>
-
-        <div class="actions">
-          <button id="applyBtn" class="btn btn-outline" type="button" aria-label="Apply preview changes">
-            <i class="fa-solid fa-eye-dropper"></i> Apply
-          </button>
-
-          <button id="resetBtn" class="btn btn-outline" type="button" aria-label="Reset">
-            <i class="fa-solid fa-rotate-left"></i> Reset
-          </button>
-
-          <button id="randomBtn" class="btn btn-outline" type="button" aria-label="Randomize">
-            <i class="fa-solid fa-shuffle"></i> Randomize
-          </button>
-        </div>
-
-        <div class="share-row" aria-hidden="true">
-          <a id="twitterShare" target="_blank" rel="noopener noreferrer" href="#" title="Share on Twitter"><i class="fa-brands fa-twitter"></i> Tweet</a>
-          <a id="fbShare" target="_blank" rel="noopener noreferrer" href="#" title="Share on Facebook"><i class="fa-brands fa-facebook"></i> Share</a>
-          <a id="copyLink" href="#" class="" title="Copy link" role="button"><i class="fa-solid fa-link"></i> Copy Link</a>
-        </div>
-
-        <p style="margin-top:14px;color:#cfe0ff;font-size:0.86rem">Contact: <a href="mailto:contact@cognitialabs.info" style="color:#fff;text-decoration:underline">contact@cognitialabs.info</a></p>
-      </form>
-    </aside>
+    </section>
   </main>
 
-  <!-- html2canvas (you had this in your original) -->
-  <script src="js/html2canvas.js"></script>
-
+  <!-- html2canvas will be loaded dynamically if not present -->
   <script>
-    // fallback if html2canvas isn't available from js folder, try CDN:
-    (function ensureHtml2canvas(){
-      if (typeof html2canvas === 'undefined') {
+  (function(){
+    // DOM refs
+    const inputEl = document.querySelector(".input_user") || document.getElementById('username');
+    const searchBtn = document.getElementById("searchBtn");
+    const downloadBtn = document.getElementById("downloadBtn");
+    const resetBtn = document.getElementById("resetBtn");
+
+    const avatarImg = document.getElementById("avatarImg");
+    const nameText = document.getElementById("nameText");
+    const roleText = document.getElementById("roleText");
+    const bioText = document.getElementById("bioText");
+    const followersStat = document.getElementById("followersStat");
+    const reposStat = document.getElementById("reposStat");
+    const starsStat = document.getElementById("starsStat");
+    const repoList = document.getElementById("repoList");
+
+    const twitterShare = document.getElementById("twitterShare");
+    const fbShare = document.getElementById("fbShare");
+    const githubLink = document.getElementById("githubLink");
+
+    let lastUser = "";
+
+    // small helper
+    function safe(v){ return v === null || v === undefined ? "" : String(v); }
+    function clearBadge(){
+      avatarImg.src = "images/github_logo.png";
+      avatarImg.alt = "avatar";
+      nameText.textContent = "GitHub";
+      roleText.textContent = "Open Source Contributor";
+      bioText.textContent = "Bio here — proud contributor to open source.";
+      followersStat.textContent = "0 followers";
+      reposStat.textContent = "0 repos";
+      starsStat.textContent = "0 stars";
+      repoList.innerHTML = '<div class="small-note" id="repoNote">No user searched yet — enter a username on the left.</div>';
+    }
+
+    // show loading
+    function setLoading(on=true){
+      if(on){
+        repoList.innerHTML = '<div class="loading">Loading user and repositories…</div>';
+      }
+    }
+
+    // fetch user + repos
+    async function fetchGitHub(username){
+      username = (username||"").trim();
+      if(!username){ alert("Please enter github user name"); inputEl.focus(); return; }
+
+      lastUser = username;
+      setLoading(true);
+
+      // GitHub rate limit note: unauthenticated = 60/hr per IP
+      const headers = { "Accept": "application/vnd.github.v3+json" };
+
+      try {
+        const [userResp, reposResp] = await Promise.all([
+          fetch(`https://api.github.com/users/${encodeURIComponent(username)}`, { headers }),
+          fetch(`https://api.github.com/users/${encodeURIComponent(username)}/repos?per_page=100&sort=pushed`, { headers })
+        ]);
+
+        if(userResp.status === 404){
+          clearBadge();
+          repoList.innerHTML = `<div class="error">User "<strong>${escapeHtml(username)}</strong>" not found.</div>`;
+          return;
+        }
+        if(!userResp.ok){
+          throw new Error(`Failed to fetch user: ${userResp.status}`);
+        }
+        if(!reposResp.ok){
+          // proceed with empty repos array if 404, else throw
+          if(reposResp.status !== 404) throw new Error(`Failed to fetch repos: ${reposResp.status}`);
+        }
+
+        const userData = await userResp.json();
+        const reposData = await reposResp.json();
+
+        renderUser(userData, Array.isArray(reposData) ? reposData : []);
+      } catch(err){
+        console.error(err);
+        repoList.innerHTML = `<div class="error">Error while fetching data. Check console for details.</div>`;
+      }
+    }
+
+    // render user and top repos
+    function renderUser(user, repos){
+      avatarImg.src = user.avatar_url || 'images/github_logo.png';
+      avatarImg.alt = `${safe(user.login)} avatar`;
+      nameText.textContent = safe(user.name) || safe(user.login) || 'GitHub';
+      roleText.textContent = safe(user.login) ? 'Open Source Contributor' : 'Open Source Enthusiast';
+      bioText.textContent = safe(user.bio) || 'No bio available';
+
+      followersStat.innerHTML = `<i class="fa fa-users"></i> ${safe(user.followers)} followers`;
+      reposStat.innerHTML = `<i class="fa fa-book"></i> ${safe(user.public_repos)} repos`;
+
+      // compute total stars across fetched repos
+      const totalStars = (repos || []).reduce((s,r)=> s + (r.stargazers_count||0), 0);
+      starsStat.innerHTML = `<i class="fa fa-star"></i> ${totalStars} stars`;
+
+      // build repo list: sort by stars desc and show top 8
+      if(!Array.isArray(repos) || repos.length === 0){
+        repoList.innerHTML = '<div class="small-note">This user has no public repositories.</div>';
+        return;
+      }
+
+      const sorted = repos.slice().sort((a,b) => (b.stargazers_count||0) - (a.stargazers_count||0));
+      const top = sorted.slice(0, 8);
+
+      repoList.innerHTML = top.map(r => {
+        return `
+          <div class="repo-item">
+            <div class="repo-left">
+              <a href="${r.html_url}" target="_blank" rel="noopener noreferrer">${escapeHtml(r.name)}</a>
+              ${r.description ? `<div class="repo-desc">${escapeHtml(r.description)}</div>` : ''}
+              <div class="repo-meta">
+                ${r.language ? `<span>${escapeHtml(r.language)}</span>` : ''}
+                &nbsp; • &nbsp; ★ ${r.stargazers_count || 0}  &nbsp; • &nbsp; Forks ${r.forks_count || 0}
+              </div>
+            </div>
+            <div style="text-align:right;color:var(--muted);font-size:0.85rem">
+              ${new Date(r.pushed_at).toLocaleDateString()}
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      // update share links
+      const page = encodeURIComponent(`https://github.com/${user.login}`);
+      twitterShare.href = `https://twitter.com/intent/tweet?text=${encodeURIComponent('I generated an open-source badge for')}%20${encodeURIComponent(user.login)}&url=${page}&hashtags=opensource`;
+      fbShare.href = `https://www.facebook.com/sharer/sharer.php?u=${page}`;
+      githubLink.href = `https://github.com/${user.login}`;
+    }
+
+    // Download using html2canvas
+    function ensureHtml2CanvasAndCapture(){
+      if(typeof html2canvas === 'undefined'){
+        // load CDN
         const s = document.createElement('script');
         s.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js';
         s.crossOrigin = 'anonymous';
         s.referrerPolicy = 'no-referrer';
+        s.onload = () => captureBadge();
+        s.onerror = () => alert('Failed to load html2canvas from CDN.');
         document.head.appendChild(s);
+      } else {
+        captureBadge();
       }
-    })();
-
-    // DOM refs
-    const nameText = document.getElementById('nameText');
-    const roleText = document.getElementById('roleText');
-    const bioText  = document.getElementById('bioText');
-    const avatar   = document.getElementById('avatarText');
-    const inputName = document.getElementById('inputName');
-    const inputRole = document.getElementById('inputRole');
-    const inputBio  = document.getElementById('inputBio');
-
-    function setPreview(name, role, bio){
-      nameText.textContent = name || 'GitHub';
-      roleText.textContent = role || 'Open Source Contributor';
-      bioText.textContent = bio || 'Thank you for your contributions to open source.';
-      // avatar initials (two chars)
-      const parts = (name || 'GH').trim().split(/\s+/);
-      let initials = parts.length === 1 ? parts[0].slice(0,2) : (parts[0][0]+parts[1][0]);
-      initials = initials.toUpperCase();
-      avatar.textContent = initials;
     }
 
-    // initial
-    setPreview(inputName.value, inputRole.value, inputBio.value);
-
-    // Apply / reset / random
-    document.getElementById('applyBtn').addEventListener('click', () => {
-      setPreview(inputName.value, inputRole.value, inputBio.value);
-    });
-
-    document.getElementById('resetBtn').addEventListener('click', () => {
-      inputName.value = 'GitHub';
-      inputRole.value = 'Open Source Contributor';
-      inputBio.value  = 'We, all the developers in the universe, thank you for your contributions to open source. Your work powers tools used by millions. Keep contributing!';
-      setPreview(inputName.value, inputRole.value, inputBio.value);
-    });
-
-    document.getElementById('randomBtn').addEventListener('click', () => {
-      const names = ['Ava Dev','OpenForge','DevLab','CodeSprout','NeonByte'];
-      const roles = ['Maintainer','Contributor','Core Committer','Open Source Advocate','Project Lead'];
-      const bios = [
-        'Committed to open code and better tooling for everyone.',
-        'Building tools and sharing knowledge — open source first.',
-        'Proud contributor making the web a friendlier place for devs.',
-        'Open source discoverer, hacker, and maintainer of small things.'
-      ];
-      inputName.value = names[Math.floor(Math.random()*names.length)];
-      inputRole.value = roles[Math.floor(Math.random()*roles.length)];
-      inputBio.value = bios[Math.floor(Math.random()*bios.length)];
-      setPreview(inputName.value, inputRole.value, inputBio.value);
-    });
-
-    // Download handler
-    const downloadBtn = document.getElementById('downloadBtn');
-    const badgeEl = document.getElementById('badge');
-
-    downloadBtn.addEventListener('click', async () => {
-      if (typeof html2canvas === 'undefined') {
-        alert('html2canvas not loaded yet. Please try again in a moment.');
-        return;
-      }
+    function captureBadge(){
+      const badge = document.getElementById('badge');
       downloadBtn.disabled = true;
       downloadBtn.textContent = 'Preparing...';
-      try {
-        const canvas = await html2canvas(badgeEl, { scale: 2, backgroundColor: null, useCORS: true });
-        const url = canvas.toDataURL('image/png');
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = `${(inputName.value||'badge').replace(/\s+/g,'_')}_badge.png`;
-        document.body.appendChild(a);
-        a.click();
-        a.remove();
-      } catch (err) {
+      html2canvas(badge, { scale: 2, useCORS: true, backgroundColor: null }).then(canvas=>{
+        canvas.toBlob(blob=>{
+          if(!blob){ alert('Export failed'); downloadBtn.disabled=false; downloadBtn.textContent='Download'; return; }
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = `${(lastUser||'badge').replace(/\s+/g,'_')}_badge.png`;
+          document.body.appendChild(a);
+          a.click();
+          a.remove();
+          URL.revokeObjectURL(url);
+          downloadBtn.disabled = false;
+          downloadBtn.textContent = 'Download';
+        }, 'image/png');
+      }).catch(err=>{
         console.error(err);
-        alert('Failed to export. Check console for details.');
-      } finally {
+        alert('Export failed — see console');
         downloadBtn.disabled = false;
-        downloadBtn.innerHTML = '<i class="fa-solid fa-download"></i> Download Badge';
-      }
-    });
+        downloadBtn.textContent = 'Download';
+      });
+    }
 
-    // Share links
-    const twitter = document.getElementById('twitterShare');
-    const fb = document.getElementById('fbShare');
-    const copyLink = document.getElementById('copyLink');
-    const pageUrl = encodeURIComponent('https://tharvid.github.io/Open-Source-Badge-Generator/');
+    // simple escaping
+    function escapeHtml(s){
+      if(!s) return '';
+      return String(s)
+        .replace(/&/g,'&amp;')
+        .replace(/</g,'&lt;')
+        .replace(/>/g,'&gt;')
+        .replace(/"/g,'&quot;');
+    }
 
-    twitter.href = `https://twitter.com/intent/tweet?text=${encodeURIComponent('I just generated an open-source badge!')}%20&url=${pageUrl}&hashtags=proudcontributor`;
-    fb.href = `https://www.facebook.com/sharer/sharer.php?u=${pageUrl}`;
+    // events
+    searchBtn.addEventListener('click', ()=> fetchGitHub(inputEl.value));
+    inputEl.addEventListener('keyup', (e)=> { if(e.key === 'Enter') fetchGitHub(inputEl.value); });
+    downloadBtn.addEventListener('click', ensureHtml2CanvasAndCapture);
+    resetBtn.addEventListener('click', ()=> { inputEl.value = ''; clearBadge(); });
 
-    copyLink.addEventListener('click', (e) => {
-      e.preventDefault();
-      navigator.clipboard?.writeText(decodeURIComponent(pageUrl)).then(()=> {
-        copyLink.textContent = 'Copied ✓';
-        setTimeout(()=> copyLink.innerHTML = '<i class="fa-solid fa-link"></i> Copy Link', 1600);
-      }, ()=> alert('Copy failed'));
-    });
+    // initial state
+    clearBadge();
 
+    // allow calling programmatically: window.generateBadge('username')
+    window.generateBadge = (username) => { inputEl.value = username; fetchGitHub(username); };
+
+  })();
   </script>
 </body>
 </html>

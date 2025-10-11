@@ -1,92 +1,362 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Open Source Badge</title>
-    <link rel="stylesheet" href="css/font.css">
-    <link rel="stylesheet" href="css/font-awesome.min.css">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-    <style>
-        body {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            background-color: #f4f4f4;
-            font-family: Arial, sans-serif;
-            margin: 0;
-        }
-        .container {
-            width: 100%;
-            max-width: 400px;
-            text-align: center;
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        .user_img img {
-            width: 100px;
-            height: 100px;
-        }
-        .user_name h1, .user_name h3 {
-            margin: 10px 0;
-        }
-        .follow p {
-            margin: 5px 0;
-        }
-        .repo h2, .repo p {
-            margin: 10px 0;
-        }
-        .download_button, .share {
-            margin-top: 20px;
-        }
-    </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Open Source Badge — TharVid</title>
+
+  <!-- Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700;800&family=Rubik:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- Tiny reset + styles -->
+  <style>
+    :root{
+      --bg1: #0f172a;
+      --accent: #ff6f61;
+      --accent-2: #7c2ae8;
+      --card-bg: rgba(255,255,255,0.95);
+      --muted: #5b6270;
+      --glass: rgba(255,255,255,0.06);
+      --radius: 16px;
+      --shadow: 0 10px 30px rgba(2,6,23,0.45);
+      --max-w: 920px;
+      --container-pad: 28px;
+    }
+
+    html,body{height:100%;}
+    body{
+      margin:0;
+      font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background: radial-gradient(1200px 600px at 10% 10%, rgba(124,42,232,0.18), transparent 10%),
+                  linear-gradient(180deg, #06061b 0%, #071030 55%, #071935 100%);
+      color:#0b1220;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:40px 20px;
+    }
+
+    .page {
+      width:100%;
+      max-width:var(--max-w);
+      display:grid;
+      grid-template-columns: 420px 1fr;
+      gap:28px;
+      align-items:start;
+    }
+
+    /* Card / Badge preview */
+    .badge-card{
+      background: linear-gradient(180deg, rgba(255,255,255,0.96), rgba(255,255,255,0.92));
+      border-radius:var(--radius);
+      padding:20px;
+      box-shadow:var(--shadow);
+      border:1px solid rgba(255,255,255,0.06);
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+    }
+
+    .badge-preview {
+      width:100%;
+      max-width:360px;
+      background: linear-gradient(135deg, rgba(124,42,232,0.06), rgba(255,111,97,0.02));
+      border-radius:14px;
+      padding:26px;
+      text-align:center;
+      box-shadow: 0 6px 22px rgba(2,6,23,0.12);
+    }
+
+    .avatar {
+      width:112px;height:112px;border-radius:50%;
+      border:4px solid white;
+      background:linear-gradient(135deg,var(--accent),var(--accent-2));
+      display:inline-flex;align-items:center;justify-content:center;
+      color:white;font-weight:800;font-family:"Rubik",sans-serif;font-size:34px;
+      box-shadow: 0 6px 18px rgba(12,18,40,0.18);
+    }
+
+    .role {
+      font-size:0.92rem;color:var(--accent);font-weight:700;margin-top:12px;
+      letter-spacing:0.6px;
+    }
+    .name {
+      font-family:"Rubik",sans-serif;font-size:1.8rem;margin:8px 0 6px;color:#141432;
+    }
+    .bio {
+      color:var(--muted);font-size:0.975rem;line-height:1.45;margin-top:10px;padding:0 6px;
+    }
+
+    .stats {
+      display:flex;gap:10px;justify-content:center;margin-top:16px;
+    }
+    .stat {
+      background:rgba(255,255,255,0.6);
+      border-radius:10px;padding:8px 12px;font-weight:600;font-size:0.95rem;color:#111;
+      box-shadow: 0 4px 12px rgba(2,6,23,0.04);
+    }
+
+    /* Controls panel */
+    .controls {
+      background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+      border-radius:var(--radius);
+      padding:22px;
+      box-shadow: 0 8px 28px rgba(2,6,23,0.22);
+      color: #e6eefc;
+      border: 1px solid rgba(255,255,255,0.04);
+      min-height:320px;
+    }
+
+    .brand {
+      display:flex;align-items:center;gap:12px;margin-bottom:12px;
+    }
+    .brand h1{margin:0;font-size:1.1rem;color:#fff;font-family:"Rubik",sans-serif;}
+    .brand p{margin:0;color:#bcd0ff;font-size:0.85rem}
+
+    label{display:block;font-size:0.85rem;color:#cfe0ff;margin-top:12px;margin-bottom:6px}
+    input[type="text"], textarea {
+      width:100%;padding:10px 12px;border-radius:10px;border:1px solid rgba(255,255,255,0.06);
+      background:transparent;color:#fff;font-size:0.95rem;resize:vertical;
+      outline:none;
+    }
+    textarea{min-height:84px}
+
+    .actions {
+      display:flex;gap:12px;margin-top:18px;flex-wrap:wrap;
+    }
+
+    .btn {
+      display:inline-flex;align-items:center;gap:10px;padding:10px 14px;border-radius:12px;
+      border:0;cursor:pointer;font-weight:700;font-size:0.95rem;
+      box-shadow: 0 6px 22px rgba(2,6,23,0.12);
+    }
+    .btn-download{
+      background: linear-gradient(90deg,var(--accent) 0%, var(--accent-2) 100%); color:white;
+    }
+    .btn-outline{
+      background:transparent;color:#cfe0ff;border:1px solid rgba(255,255,255,0.06);
+    }
+
+    .share-row {margin-top:18px;display:flex;gap:8px;align-items:center;}
+    .share-row a{color:#e6eefc;font-weight:700;text-decoration:none;border-radius:10px;padding:8px 12px;border:1px solid rgba(255,255,255,0.04)}
+    .share-row a:hover{opacity:0.95;transform:translateY(-2px)}
+
+    .footer {
+      margin-top:20px;color:#cfe0ff;font-size:0.86rem;
+    }
+
+    /* small screens */
+    @media (max-width:900px){
+      .page{grid-template-columns: 1fr; padding:0; gap:18px}
+      body{padding:28px 18px}
+      .controls{order:2}
+    }
+
+  </style>
 </head>
-
 <body>
-    <div class="container">
-        <div class="user_img">
-            <img src="images/github_logo.png" alt="GitHub Logo">
+  <main class="page" aria-labelledby="pageTitle">
+    <!-- LEFT: Badge Preview -->
+    <section class="badge-card" aria-label="Badge preview area">
+      <div id="badge" class="badge-preview" role="img" aria-label="Open source badge">
+        <div class="avatar" id="avatarText" aria-hidden="true">GH</div>
+        <div class="role" id="roleText">Open Source Contributor</div>
+        <div class="name" id="nameText">GitHub</div>
+        <div class="bio" id="bioText">
+          We, all the developers in the universe, thank you for your contributions to open source. Your work powers tools used by millions. Keep contributing!
         </div>
-        <div class="user_name">
-            <h3>Open Source Contributor</h3>
-            <h1>GitHub</h1>
-        </div>
-        <div class="follow">
-            <p>Bio Here</p>
-            <p>#proudcontributor</p>
-        </div>
-        <div class="repo">
-            <h2>Open Source Contributor</h2>
-            <p>Dear User,</p>
-            <p>We, all the developers in the universe, would like to thank you for all your contributions to open source. The world is powered by open source, and your contributions help millions of developers. Keep contributing to a better internet.</p>
-            <p>Thank You!</p>
-            <p>Anonymous Developer From Wakanda!</p>
-        </div>
-        <div class="download_button">
-            <button class="download" type="button"><i class="fa fa-download"></i> Download Badge</button>
-        </div>
-        <div class="share">
-            <div class="fb-share-button" data-href="https://tharvid.github.io/Open-Source-Badge-Generator/" data-layout="button" data-size="large">
-                <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Ftharvid.github.io%2FOpen-Source-Badge-Generator%2F&src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a>
-            </div>
-            <a class="twitter-share-button" href="https://twitter.com/intent/tweet?hashtags=proudcontributor&text=Generate%20Badge%20GitHub%20on%20.." data-size="large">Share Twitter</a>
-        </div>
-    </div>
-    <div align="center" style="padding-top: 20px;">
-        <p>Made With <i class="fa fa-heart" style="font-size:18px;color:red"></i> By <i class="fa fa-github" style="font-size:18px"></i><a href="https://github.com/TharVid">TharVid</a></p>
-    </div>
-    <script src="js/app.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script type="text/javascript" src="js/html2canvas.js"></script>
-    <div id="fb-root"></div>
-    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v8.0" nonce="qrh32Ait"></script>
-</body>
 
+        <div class="stats" aria-hidden="true">
+          <div class="stat"><i class="fa-solid fa-code-branch"></i> 42 repos</div>
+          <div class="stat"><i class="fa-solid fa-star"></i> 1.2k stars</div>
+          <div class="stat"><i class="fa-solid fa-users"></i> 8.3k followers</div>
+        </div>
+      </div>
+
+      <div style="width:100%;display:flex;gap:10px;margin-top:18px;justify-content:center;flex-wrap:wrap">
+        <button id="downloadBtn" class="btn btn-download" aria-label="Download badge">
+          <i class="fa-solid fa-download"></i> Download Badge
+        </button>
+
+        <a id="previewLink" class="btn btn-outline" href="https://github.com/TharVid" target="_blank" rel="noopener noreferrer">
+          <i class="fa-brands fa-github"></i> View on GitHub
+        </a>
+      </div>
+
+      <div class="footer" aria-hidden="true">
+        Made with <i class="fa-solid fa-heart" style="color:#ff6f61;margin:0 6px"></i> by <a href="https://github.com/TharVid" target="_blank" rel="noopener noreferrer" style="color:#e6eefc;text-decoration:underline">TharVid</a>
+      </div>
+    </section>
+
+    <!-- RIGHT: Controls -->
+    <aside class="controls" aria-labelledby="controlsHeading">
+      <div class="brand">
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <rect x="1" y="1" width="22" height="22" rx="6" fill="url(#g)"/>
+          <defs>
+            <linearGradient id="g" x1="0" x2="1">
+              <stop offset="0" stop-color="#ff6f61"/>
+              <stop offset="1" stop-color="#7c2ae8"/>
+            </linearGradient>
+          </defs>
+        </svg>
+        <div>
+          <h1 id="controlsHeading">Open Source Badge Generator</h1>
+          <p style="margin:0;font-size:0.86rem;color:#bcd0ff">Simple, responsive badge you can download and share.</p>
+        </div>
+      </div>
+
+      <form id="badgeForm" onsubmit="return false;" aria-describedby="formDesc">
+        <div id="formDesc" style="display:none">Controls to edit badge preview text and download as PNG</div>
+
+        <label for="inputName">Display name</label>
+        <input id="inputName" type="text" value="GitHub" maxlength="40" aria-label="Display name">
+
+        <label for="inputRole">Role / Title</label>
+        <input id="inputRole" type="text" value="Open Source Contributor" maxlength="60" aria-label="Role or title">
+
+        <label for="inputBio">Short bio / message</label>
+        <textarea id="inputBio" maxlength="240" aria-label="Short bio">We, all the developers in the universe, thank you for your contributions to open source. Your work powers tools used by millions. Keep contributing!</textarea>
+
+        <div class="actions">
+          <button id="applyBtn" class="btn btn-outline" type="button" aria-label="Apply preview changes">
+            <i class="fa-solid fa-eye-dropper"></i> Apply
+          </button>
+
+          <button id="resetBtn" class="btn btn-outline" type="button" aria-label="Reset">
+            <i class="fa-solid fa-rotate-left"></i> Reset
+          </button>
+
+          <button id="randomBtn" class="btn btn-outline" type="button" aria-label="Randomize">
+            <i class="fa-solid fa-shuffle"></i> Randomize
+          </button>
+        </div>
+
+        <div class="share-row" aria-hidden="true">
+          <a id="twitterShare" target="_blank" rel="noopener noreferrer" href="#" title="Share on Twitter"><i class="fa-brands fa-twitter"></i> Tweet</a>
+          <a id="fbShare" target="_blank" rel="noopener noreferrer" href="#" title="Share on Facebook"><i class="fa-brands fa-facebook"></i> Share</a>
+          <a id="copyLink" href="#" class="" title="Copy link" role="button"><i class="fa-solid fa-link"></i> Copy Link</a>
+        </div>
+
+        <p style="margin-top:14px;color:#cfe0ff;font-size:0.86rem">Contact: <a href="mailto:contact@cognitialabs.info" style="color:#fff;text-decoration:underline">contact@cognitialabs.info</a></p>
+      </form>
+    </aside>
+  </main>
+
+  <!-- html2canvas (you had this in your original) -->
+  <script src="js/html2canvas.js"></script>
+
+  <script>
+    // fallback if html2canvas isn't available from js folder, try CDN:
+    (function ensureHtml2canvas(){
+      if (typeof html2canvas === 'undefined') {
+        const s = document.createElement('script');
+        s.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js';
+        s.crossOrigin = 'anonymous';
+        s.referrerPolicy = 'no-referrer';
+        document.head.appendChild(s);
+      }
+    })();
+
+    // DOM refs
+    const nameText = document.getElementById('nameText');
+    const roleText = document.getElementById('roleText');
+    const bioText  = document.getElementById('bioText');
+    const avatar   = document.getElementById('avatarText');
+    const inputName = document.getElementById('inputName');
+    const inputRole = document.getElementById('inputRole');
+    const inputBio  = document.getElementById('inputBio');
+
+    function setPreview(name, role, bio){
+      nameText.textContent = name || 'GitHub';
+      roleText.textContent = role || 'Open Source Contributor';
+      bioText.textContent = bio || 'Thank you for your contributions to open source.';
+      // avatar initials (two chars)
+      const parts = (name || 'GH').trim().split(/\s+/);
+      let initials = parts.length === 1 ? parts[0].slice(0,2) : (parts[0][0]+parts[1][0]);
+      initials = initials.toUpperCase();
+      avatar.textContent = initials;
+    }
+
+    // initial
+    setPreview(inputName.value, inputRole.value, inputBio.value);
+
+    // Apply / reset / random
+    document.getElementById('applyBtn').addEventListener('click', () => {
+      setPreview(inputName.value, inputRole.value, inputBio.value);
+    });
+
+    document.getElementById('resetBtn').addEventListener('click', () => {
+      inputName.value = 'GitHub';
+      inputRole.value = 'Open Source Contributor';
+      inputBio.value  = 'We, all the developers in the universe, thank you for your contributions to open source. Your work powers tools used by millions. Keep contributing!';
+      setPreview(inputName.value, inputRole.value, inputBio.value);
+    });
+
+    document.getElementById('randomBtn').addEventListener('click', () => {
+      const names = ['Ava Dev','OpenForge','DevLab','CodeSprout','NeonByte'];
+      const roles = ['Maintainer','Contributor','Core Committer','Open Source Advocate','Project Lead'];
+      const bios = [
+        'Committed to open code and better tooling for everyone.',
+        'Building tools and sharing knowledge — open source first.',
+        'Proud contributor making the web a friendlier place for devs.',
+        'Open source discoverer, hacker, and maintainer of small things.'
+      ];
+      inputName.value = names[Math.floor(Math.random()*names.length)];
+      inputRole.value = roles[Math.floor(Math.random()*roles.length)];
+      inputBio.value = bios[Math.floor(Math.random()*bios.length)];
+      setPreview(inputName.value, inputRole.value, inputBio.value);
+    });
+
+    // Download handler
+    const downloadBtn = document.getElementById('downloadBtn');
+    const badgeEl = document.getElementById('badge');
+
+    downloadBtn.addEventListener('click', async () => {
+      if (typeof html2canvas === 'undefined') {
+        alert('html2canvas not loaded yet. Please try again in a moment.');
+        return;
+      }
+      downloadBtn.disabled = true;
+      downloadBtn.textContent = 'Preparing...';
+      try {
+        const canvas = await html2canvas(badgeEl, { scale: 2, backgroundColor: null, useCORS: true });
+        const url = canvas.toDataURL('image/png');
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `${(inputName.value||'badge').replace(/\s+/g,'_')}_badge.png`;
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+      } catch (err) {
+        console.error(err);
+        alert('Failed to export. Check console for details.');
+      } finally {
+        downloadBtn.disabled = false;
+        downloadBtn.innerHTML = '<i class="fa-solid fa-download"></i> Download Badge';
+      }
+    });
+
+    // Share links
+    const twitter = document.getElementById('twitterShare');
+    const fb = document.getElementById('fbShare');
+    const copyLink = document.getElementById('copyLink');
+    const pageUrl = encodeURIComponent('https://tharvid.github.io/Open-Source-Badge-Generator/');
+
+    twitter.href = `https://twitter.com/intent/tweet?text=${encodeURIComponent('I just generated an open-source badge!')}%20&url=${pageUrl}&hashtags=proudcontributor`;
+    fb.href = `https://www.facebook.com/sharer/sharer.php?u=${pageUrl}`;
+
+    copyLink.addEventListener('click', (e) => {
+      e.preventDefault();
+      navigator.clipboard?.writeText(decodeURIComponent(pageUrl)).then(()=> {
+        copyLink.textContent = 'Copied ✓';
+        setTimeout(()=> copyLink.innerHTML = '<i class="fa-solid fa-link"></i> Copy Link', 1600);
+      }, ()=> alert('Copy failed'));
+    });
+
+  </script>
+</body>
 </html>

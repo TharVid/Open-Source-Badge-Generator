@@ -2,384 +2,868 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Open Source Badge — GitHub</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="theme-color" content="#0b0f1e" />
 
-  <!-- Fonts + icons -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&family=Rubik:wght@600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+  <title>Open Source Badge Generator — Create a shareable GitHub Contributor badge</title>
+  <meta name="description" content="Free Open Source Badge Generator. Turn any GitHub profile into a shareable Open Source Contributor badge in seconds. Download as PNG or share on LinkedIn, WhatsApp, X (Twitter), Facebook and Telegram." />
+  <meta name="keywords" content="open source badge generator, github badge generator, open source contributor badge, github profile badge, developer badge, github stats badge, programmer badge, linkedin github badge, shareable github card, open source card, github profile card, github open source, share github profile, opensource badge, coder badge" />
+  <meta name="author" content="TharVid" />
+  <meta name="robots" content="index, follow" />
+
+  <link rel="canonical" href="https://tharvid.in/Open-Source-Badge-Generator/" />
+
+  <meta property="og:title" content="Open Source Badge Generator — Shareable GitHub Contributor Badge" />
+  <meta property="og:description" content="Generate a polished Open Source Contributor badge for any GitHub profile. Download as PNG and share on LinkedIn, WhatsApp, X and more." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://tharvid.in/Open-Source-Badge-Generator/" />
+  <meta property="og:image" content="https://tharvid.in/Open-Source-Badge-Generator/images/screenshots/Badge.png" />
+  <meta property="og:site_name" content="Open Source Badge Generator" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Open Source Badge Generator" />
+  <meta name="twitter:description" content="Create a shareable Open Source Contributor badge from any GitHub profile." />
+  <meta name="twitter:image" content="https://tharvid.in/Open-Source-Badge-Generator/images/screenshots/Badge.png" />
+
+  <link rel="icon" href="images/github_logo.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Open Source Badge Generator",
+    "url": "https://tharvid.in/Open-Source-Badge-Generator/",
+    "description": "Free Open Source Badge Generator — turn any GitHub profile into a shareable Open Source Contributor badge. Download as PNG or share on LinkedIn, WhatsApp, X, Facebook and Telegram.",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Web",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "author": { "@type": "Person", "name": "TharVid", "url": "https://github.com/TharVid" },
+    "keywords": "open source badge, github badge generator, github contributor badge, developer badge, linkedin github badge"
+  }
+  </script>
 
   <style>
-    :root{
-      --bg:#081026;
-      --card:#fff;
-      --accent1:#ff6f61;
-      --accent2:#7c2ae8;
-      --muted:#64718a;
-      --radius:14px;
-      --shadow:0 12px 30px rgba(2,6,23,0.35);
-    }
-    html,body {height:100%}
-    body{
-      margin:0;
-      font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-      background: linear-gradient(180deg,#041028 0%, #071032 60%);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      padding:28px;
-      color:#0b1220;
-    }
-
-    .layout {
-      width:100%;
-      max-width:980px;
-      display:grid;
-      grid-template-columns: 380px 1fr;
-      gap:22px;
-      align-items:start;
+    :root {
+      --bg-0: #0a0d1a;
+      --bg-1: #0f1428;
+      --bg-2: #141a35;
+      --surface: rgba(255, 255, 255, 0.04);
+      --surface-hi: rgba(255, 255, 255, 0.08);
+      --border: rgba(255, 255, 255, 0.08);
+      --border-hi: rgba(255, 255, 255, 0.16);
+      --text: #f2f5ff;
+      --text-soft: #a5b0cc;
+      --text-mute: #6b7590;
+      --accent-1: #ff5f6d;
+      --accent-2: #7c2ae8;
+      --accent-3: #4f8cff;
+      --brand: linear-gradient(135deg, #ff5f6d 0%, #7c2ae8 55%, #4f8cff 100%);
+      --brand-soft: linear-gradient(135deg, rgba(255,95,109,.15), rgba(124,42,232,.15) 55%, rgba(79,140,255,.15));
+      --radius: 18px;
+      --shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
     }
 
-    /* Left: controls */
-    .panel {
-      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
-      border-radius: var(--radius);
-      padding:18px;
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    html { -webkit-text-size-adjust: 100%; }
+    body {
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background:
+        radial-gradient(1200px 600px at 10% -10%, rgba(124,42,232,0.25), transparent 60%),
+        radial-gradient(900px 500px at 110% 10%, rgba(255,95,109,0.18), transparent 60%),
+        radial-gradient(800px 500px at 50% 120%, rgba(79,140,255,0.18), transparent 60%),
+        linear-gradient(180deg, var(--bg-0), var(--bg-1) 60%, var(--bg-2));
+      color: var(--text);
+      line-height: 1.5;
+      min-height: 100svh;
+      overflow-x: hidden;
+    }
+
+    a { color: inherit; }
+    button { font-family: inherit; }
+
+    .shell { max-width: 1160px; margin: 0 auto; padding: 20px clamp(16px, 4vw, 32px) 56px; }
+
+    header.top { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 0 24px; }
+    .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; }
+    .brand .mark {
+      width: 34px; height: 34px; border-radius: 10px;
+      background: var(--brand); display: grid; place-items: center;
+      color: white; font-family: "Space Grotesk", Inter, sans-serif; font-weight: 700;
+      box-shadow: 0 8px 24px rgba(124,42,232,0.35); font-size: 0.82rem;
+    }
+    .brand .name { font-size: 0.98rem; }
+    .brand .name small { display: block; color: var(--text-mute); font-weight: 500; font-size: 0.75rem; }
+    .top .repo-link {
+      display: inline-flex; align-items: center; gap: 8px;
+      color: var(--text-soft); text-decoration: none;
+      padding: 8px 14px; border-radius: 999px;
+      border: 1px solid var(--border); background: var(--surface);
+      font-size: 0.88rem; font-weight: 500;
+      transition: background .2s, color .2s, border-color .2s;
+    }
+    .top .repo-link:hover { color: var(--text); background: var(--surface-hi); border-color: var(--border-hi); }
+
+    .hero { text-align: center; padding: 8px 0 28px; }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 6px 12px; border-radius: 999px;
+      background: var(--brand-soft); border: 1px solid var(--border-hi);
+      color: var(--text-soft); font-size: 0.78rem; font-weight: 600; letter-spacing: 0.3px;
+      text-transform: uppercase; margin-bottom: 14px;
+    }
+    .eyebrow .dot { width: 6px; height: 6px; border-radius: 50%; background: linear-gradient(135deg, var(--accent-1), var(--accent-2)); }
+    h1.title {
+      font-family: "Space Grotesk", Inter, sans-serif;
+      font-size: clamp(1.9rem, 5vw, 3rem);
+      line-height: 1.1; margin: 0 0 12px; letter-spacing: -0.01em;
+    }
+    h1.title .grad { background: var(--brand); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .lede { color: var(--text-soft); max-width: 640px; margin: 0 auto 22px; font-size: clamp(0.98rem, 2.2vw, 1.08rem); }
+
+    .search {
+      max-width: 640px; margin: 0 auto;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 10px;
+      display: flex; gap: 8px; align-items: center;
+      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
       box-shadow: var(--shadow);
-      color:#e6eefc;
-      border:1px solid rgba(255,255,255,0.03);
     }
-    .brand {
-      display:flex;gap:12px;align-items:center;margin-bottom:12px;
-    }
-    .brand .logo {
-      width:44px;height:44px;border-radius:10px;
-      background:linear-gradient(90deg,var(--accent1),var(--accent2));
-      display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-family:Rubik;
-      box-shadow:0 6px 18px rgba(12,18,40,0.18)
-    }
-    h1{font-size:1.05rem;margin:0}
-    p.subtitle{margin:2px 0 12px;color:#cfe0ff;font-size:0.87rem}
+    .search .ico { width: 42px; height: 42px; flex: 0 0 42px; display: grid; place-items: center; color: var(--text-mute); border-radius: 12px; }
+    .search input { flex: 1; min-width: 0; padding: 14px 4px; background: transparent; border: 0; color: var(--text); font-size: 1rem; outline: none; }
+    .search input::placeholder { color: var(--text-mute); }
 
-    label {display:block;font-size:0.86rem;margin-top:10px;margin-bottom:6px;color:#cfe0ff}
-    .input-row{display:flex;gap:8px}
-    input[type="text"]{
-      flex:1;padding:10px 12px;border-radius:10px;border:1px solid rgba(255,255,255,0.06);
-      background:transparent;color:white;font-size:0.95rem;outline:none;
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      padding: 12px 18px; border-radius: 12px;
+      border: 1px solid transparent; cursor: pointer;
+      font-weight: 600; font-size: 0.92rem;
+      transition: transform .08s ease, box-shadow .2s, background .2s, border-color .2s, color .2s, filter .2s;
+      white-space: nowrap;
     }
-    button.btn {
-      padding:10px 12px;border-radius:10px;border:0;cursor:pointer;font-weight:700;
+    .btn:active { transform: translateY(1px); }
+    .btn.primary { background: var(--brand); color: white; box-shadow: 0 10px 26px rgba(124,42,232,0.35); }
+    .btn.primary:hover { filter: brightness(1.08); }
+    .btn.ghost { background: var(--surface); border-color: var(--border); color: var(--text); }
+    .btn.ghost:hover { background: var(--surface-hi); border-color: var(--border-hi); }
+    .btn.icon-only { width: 42px; padding: 0; }
+    .btn[disabled] { opacity: 0.6; cursor: not-allowed; }
+
+    .examples { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin: 16px auto 0; max-width: 640px; }
+    .examples span { color: var(--text-mute); font-size: 0.82rem; margin-right: 2px; align-self: center; }
+    .chip {
+      padding: 6px 12px; background: var(--surface); border: 1px solid var(--border);
+      color: var(--text-soft); border-radius: 999px; font-size: 0.82rem;
+      cursor: pointer; font-family: inherit;
+      transition: background .2s, color .2s, border-color .2s;
     }
-    .btn.primary { background: linear-gradient(90deg,var(--accent1),var(--accent2)); color:white; }
-    .btn.ghost { background:transparent;color:#cfe0ff;border:1px solid rgba(255,255,255,0.06); }
+    .chip:hover { color: var(--text); background: var(--surface-hi); border-color: var(--border-hi); }
 
-    .help { font-size:0.85rem;color:var(--muted); margin-top:12px }
-
-    .share-links { margin-top:14px; display:flex; gap:8px; align-items:center; flex-wrap:wrap }
-    .share-links a { color:#e6eefc;text-decoration:none;border-radius:8px;padding:8px 10px;border:1px solid rgba(255,255,255,0.04) }
-
-    /* Right: badge preview */
-    .preview-card {
-      border-radius: var(--radius);
-      background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(255,255,255,0.94));
-      padding:20px;
-      box-shadow: 0 12px 40px rgba(2,6,23,0.18);
-      max-width:100%;
+    main.grid { margin-top: 36px; display: grid; grid-template-columns: 1fr; gap: 20px; }
+    @media (min-width: 960px) {
+      main.grid { grid-template-columns: 1.4fr 1fr; gap: 28px; align-items: start; }
+      .side { position: sticky; top: 20px; }
     }
+
+    .badge-wrap {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 16px; box-shadow: var(--shadow);
+    }
+    .badge-wrap-head { display: flex; align-items: center; justify-content: space-between; margin: 2px 4px 14px; }
+    .badge-wrap-head h2 { margin: 0; font-size: 0.82rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-mute); font-weight: 600; }
+    .status { display: inline-flex; align-items: center; gap: 6px; font-size: 0.8rem; color: var(--text-mute); }
+    .status .pulse { width: 8px; height: 8px; border-radius: 50%; background: #3ddc84; box-shadow: 0 0 0 0 rgba(61,220,132,0.6); animation: pulse 1.8s infinite; }
+    @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(61,220,132,0.6); } 70% { box-shadow: 0 0 0 10px rgba(61,220,132,0); } 100% { box-shadow: 0 0 0 0 rgba(61,220,132,0); } }
+
     .badge {
-      display:flex;flex-direction:column;align-items:center;text-align:center;padding:18px;border-radius:12px;
-      background: linear-gradient(135deg, rgba(124,42,232,0.03), rgba(255,111,97,0.02));
+      background:
+        radial-gradient(600px 200px at 50% -20%, rgba(124,42,232,0.20), transparent 60%),
+        linear-gradient(180deg, #ffffff 0%, #f6f8ff 100%);
+      color: #0f1428; border-radius: 16px;
+      padding: clamp(20px, 3.5vw, 32px);
+      position: relative; overflow: hidden;
+      border: 1px solid rgba(0,0,0,0.05);
+    }
+    .badge::before {
+      content: ""; position: absolute; inset: 0;
+      background:
+        radial-gradient(400px 120px at 0% 0%, rgba(255,95,109,0.10), transparent 60%),
+        radial-gradient(400px 120px at 100% 100%, rgba(79,140,255,0.10), transparent 60%);
+      pointer-events: none;
+    }
+    .badge-ribbon {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 6px 12px; border-radius: 999px;
+      background: var(--brand); color: white;
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+      box-shadow: 0 10px 24px rgba(124,42,232,0.30);
+      position: relative; z-index: 1;
+    }
+    .badge-header { display: flex; gap: 18px; align-items: center; position: relative; z-index: 1; margin-top: 14px; }
+    .avatar-wrap { position: relative; width: clamp(84px, 14vw, 108px); height: clamp(84px, 14vw, 108px); flex-shrink: 0; }
+    .avatar-wrap::after {
+      content: ""; position: absolute; inset: -4px;
+      border-radius: 50%; padding: 4px;
+      background: var(--brand);
+      -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+      -webkit-mask-composite: xor; mask-composite: exclude;
+    }
+    .avatar { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; background: #eef; display: block; }
+    .badge-identity { min-width: 0; flex: 1; text-align: left; }
+    .badge-identity .name {
+      font-family: "Space Grotesk", Inter, sans-serif;
+      font-size: clamp(1.35rem, 3.2vw, 1.7rem);
+      line-height: 1.15; margin: 0 0 2px;
+      letter-spacing: -0.01em; color: #0f1428; word-break: break-word;
+    }
+    .badge-identity .handle { color: #5a6987; font-size: 0.95rem; margin: 0; word-break: break-all; }
+    .badge-identity .handle a { color: #5a6987; text-decoration: none; }
+    .badge-identity .handle a:hover { color: #0f1428; }
+
+    .badge-bio { margin-top: 14px; color: #3f4a68; font-size: 0.98rem; position: relative; z-index: 1; }
+
+    .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 18px; position: relative; z-index: 1; }
+    .stat { background: white; border: 1px solid rgba(0,0,0,0.05); border-radius: 12px; padding: 12px; text-align: center; box-shadow: 0 4px 14px rgba(15, 20, 40, 0.04); }
+    .stat .num { font-family: "Space Grotesk", Inter, sans-serif; font-size: clamp(1.1rem, 3vw, 1.4rem); font-weight: 700; color: #0f1428; line-height: 1; }
+    .stat .lbl { font-size: 0.7rem; color: #5a6987; margin-top: 4px; letter-spacing: 0.04em; text-transform: uppercase; }
+
+    .tribute {
+      margin: 18px 0 0;
+      padding: 16px 18px 16px 44px;
+      background: white;
+      border: 1px solid rgba(0,0,0,0.05);
+      border-radius: 14px;
+      position: relative; z-index: 1;
+      color: #3f4a68;
+      font-size: 0.95rem;
+      line-height: 1.5;
+      box-shadow: 0 4px 14px rgba(15, 20, 40, 0.04);
+    }
+    .tribute p { margin: 0; }
+    .tribute i.fa-quote-left {
+      position: absolute; left: 16px; top: 16px;
+      color: transparent;
+      background: var(--brand);
+      -webkit-background-clip: text;
+      background-clip: text;
+      font-size: 1.1rem;
+      opacity: 0.9;
     }
 
-    .avatar {
-      width:110px;height:110px;border-radius:50%;overflow:hidden;border:4px solid white;box-shadow:0 8px 24px rgba(2,6,23,0.09);
-      display:inline-block;background:#eef;object-fit:cover;
+    .footline { margin-top: 18px; display: flex; justify-content: space-between; align-items: center; gap: 10px; color: #6b7590; font-size: 0.76rem; padding-top: 14px; border-top: 1px dashed rgba(0,0,0,0.08); position: relative; z-index: 1; flex-wrap: wrap; }
+    .footline strong { color: #0f1428; }
+
+    .loading, .error { padding: 18px; border-radius: 12px; text-align: center; font-size: 0.92rem; }
+    .loading { color: var(--text-soft); background: var(--surface); border: 1px solid var(--border); }
+    .error { color: #ffd0d0; background: rgba(200, 40, 40, 0.15); border: 1px solid rgba(255, 120, 120, 0.3); }
+
+    .side-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px; }
+    .side-card + .side-card { margin-top: 16px; }
+    .side-card h3 { margin: 0 0 10px; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-mute); }
+    .side-card p.hint { color: var(--text-soft); font-size: 0.88rem; margin: 0 0 12px; }
+
+    .action-row { display: flex; gap: 10px; flex-wrap: wrap; }
+    .action-row .btn { flex: 1 1 140px; }
+
+    .share-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(88px, 1fr)); gap: 10px; }
+    .share-btn {
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
+      padding: 14px 6px; border-radius: 14px;
+      background: var(--surface); border: 1px solid var(--border);
+      color: var(--text); cursor: pointer; font-family: inherit;
+      transition: transform .08s ease, background .2s, border-color .2s;
+      font-size: 0.78rem; font-weight: 500; text-decoration: none; text-align: center;
     }
-    .role { color:var(--accent1);font-weight:700;margin-top:12px;font-size:0.95rem; letter-spacing:0.4px }
-    .display-name { font-family:Rubik, sans-serif;font-size:1.8rem;margin:8px 0;color:#141432 }
-    .bio { color:var(--muted);max-width:720px;line-height:1.4 }
+    .share-btn:hover { background: var(--surface-hi); border-color: var(--border-hi); transform: translateY(-1px); }
+    .share-btn .ico { width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; color: white; font-size: 1rem; }
+    .share-btn[data-kind="linkedin"] .ico { background: #0a66c2; }
+    .share-btn[data-kind="whatsapp"] .ico { background: #25d366; }
+    .share-btn[data-kind="x"] .ico { background: #000; border: 1px solid rgba(255,255,255,0.2); }
+    .share-btn[data-kind="facebook"] .ico { background: #1877f2; }
+    .share-btn[data-kind="telegram"] .ico { background: #229ed9; }
+    .share-btn[data-kind="reddit"] .ico { background: #ff4500; }
+    .share-btn[data-kind="email"] .ico { background: linear-gradient(135deg, #6b7590, #3f4a68); }
+    .share-btn[data-kind="copy"] .ico { background: var(--brand); }
+    .share-btn[data-kind="native"] .ico { background: var(--brand); }
 
-    .stats { display:flex;gap:10px;margin-top:14px;flex-wrap:wrap; justify-content:center }
-    .stat { background:white;padding:8px 12px;border-radius:10px;font-weight:700; color:#0b1220; box-shadow: 0 6px 18px rgba(2,6,23,0.06) }
+    .link-row { display: flex; gap: 8px; margin-top: 12px; background: var(--bg-0); border: 1px solid var(--border); border-radius: 12px; padding: 6px; }
+    .link-row input { flex: 1; min-width: 0; background: transparent; border: 0; outline: none; color: var(--text-soft); padding: 8px 10px; font-size: 0.86rem; font-family: inherit; }
 
-    .repos {
-      margin-top:18px; width:100%;
+    .toast {
+      position: fixed; left: 50%; bottom: calc(24px + env(safe-area-inset-bottom));
+      transform: translateX(-50%) translateY(20px);
+      background: #0f1428; color: white; border: 1px solid var(--border-hi);
+      padding: 10px 16px; border-radius: 999px; font-size: 0.88rem;
+      box-shadow: 0 16px 40px rgba(0,0,0,0.4);
+      opacity: 0; transition: opacity .2s, transform .25s ease;
+      z-index: 60; pointer-events: none;
     }
-    .repo-item {
-      display:flex;justify-content:space-between;align-items:flex-start;padding:10px;border-radius:10px;border:1px dashed rgba(0,0,0,0.04);margin-bottom:8px;background:rgba(0,0,0,0.01)
+    .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+    /* SEO / content sections */
+    .section { max-width: 920px; margin: 56px auto 0; padding: 0 clamp(16px, 4vw, 32px); }
+    .section h2 { font-family: "Space Grotesk", Inter, sans-serif; font-size: clamp(1.3rem, 3vw, 1.8rem); margin: 0 0 18px; letter-spacing: -0.01em; }
+    .section p { color: var(--text-soft); }
+    .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; margin-top: 18px; }
+    .feature { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px; }
+    .feature .f-ico { width: 38px; height: 38px; border-radius: 10px; background: var(--brand-soft); border: 1px solid var(--border-hi); display: grid; place-items: center; margin-bottom: 10px; color: var(--text); }
+    .feature h3 { margin: 0 0 6px; font-size: 1rem; }
+    .feature p { margin: 0; font-size: 0.9rem; }
+
+    .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; counter-reset: s; margin-top: 18px; }
+    .step { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px; position: relative; }
+    .step::before {
+      counter-increment: s; content: counter(s);
+      position: absolute; top: -14px; left: 18px;
+      width: 28px; height: 28px; border-radius: 50%;
+      background: var(--brand); color: white; display: grid; place-items: center;
+      font-family: "Space Grotesk", Inter, sans-serif; font-weight: 700; font-size: 0.9rem;
+      box-shadow: 0 6px 18px rgba(124,42,232,0.35);
     }
-    .repo-left { text-align:left; max-width:72% }
-    .repo-left a { font-weight:700;color:#141432;text-decoration:none }
-    .repo-desc { color:var(--muted);font-size:0.92rem;margin-top:6px }
-    .repo-meta { color:var(--muted); font-size:0.88rem;margin-top:8px }
+    .step h3 { margin: 4px 0 6px; font-size: 1rem; }
+    .step p { margin: 0; font-size: 0.9rem; }
 
-    .small-note { color:var(--muted); font-size:0.85rem;margin-top:8px }
+    .faq details {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: 14px 18px; margin-bottom: 10px;
+    }
+    .faq summary { cursor: pointer; font-weight: 600; outline: none; list-style: none; }
+    .faq summary::-webkit-details-marker { display: none; }
+    .faq summary::after { content: "+"; float: right; color: var(--text-mute); transition: transform .2s; font-size: 1.2rem; line-height: 1; }
+    .faq details[open] summary::after { content: "−"; }
+    .faq p { margin: 10px 0 0; font-size: 0.95rem; }
 
-    /* loading / error */
-    .loading { color:var(--muted); font-weight:700; padding:10px; text-align:center }
-    .error { color:#ffbaba;background:#4d0707;padding:10px;border-radius:8px;color:white }
+    footer.bot { text-align: center; color: var(--text-mute); font-size: 0.84rem; margin-top: 56px; padding-top: 20px; border-top: 1px solid var(--border); }
+    footer.bot a { color: var(--text-soft); text-decoration: none; }
+    footer.bot a:hover { color: var(--text); }
 
-    @media (max-width:880px){
-      .layout { grid-template-columns: 1fr; }
+    @media (max-width: 540px) {
+      .search { flex-direction: column; align-items: stretch; padding: 8px; }
+      .search .ico { display: none; }
+      .search input { padding: 12px 14px; }
+      .search .btn.primary { width: 100%; }
+      .badge-header { flex-direction: column; align-items: center; text-align: center; gap: 10px; }
+      .badge-identity { text-align: center; }
+      .repo-right { display: none; }
+      .stats { gap: 6px; }
+      .stat { padding: 10px 6px; }
+      .top .repo-link span { display: none; }
+      .brand .name small { display: none; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
     }
   </style>
 </head>
 <body>
-  <main class="layout" role="main" aria-labelledby="pageTitle">
-    <!-- Controls -->
-    <section class="panel" aria-labelledby="controlsTitle">
+  <div class="shell">
+    <header class="top">
       <div class="brand">
-        <div class="logo">OS</div>
-        <div>
-          <h1 id="controlsTitle">Open Source Badge Generator</h1>
-          <p class="subtitle">Enter a GitHub username and create a shareable badge (export PNG).</p>
+        <div class="mark">OS</div>
+        <div class="name">
+          Open Source Badge Generator
+          <small>Shareable GitHub contributor badge</small>
         </div>
       </div>
+      <a class="repo-link" href="https://github.com/TharVid/Open-Source-Badge-Generator" target="_blank" rel="noopener noreferrer" aria-label="View Open Source Badge Generator source on GitHub">
+        <i class="fab fa-github" aria-hidden="true"></i>
+        <span>Star on GitHub</span>
+      </a>
+    </header>
 
-      <label for="username">GitHub username</label>
-      <div class="input-row">
-        <input id="username" class="input_user" type="text" placeholder="e.g. TharVid" aria-label="GitHub username" />
-        <button id="searchBtn" class="btn primary" title="Search (Enter)">Search</button>
-      </div>
+    <section class="hero">
+      <span class="eyebrow"><span class="dot"></span> Free Open Source Badge Generator</span>
+      <h1 class="title">Create a <span class="grad">shareable GitHub contributor badge</span> in seconds.</h1>
+      <p class="lede">The Open Source Badge Generator turns any GitHub profile into a polished Open Source Contributor card — perfect for LinkedIn, WhatsApp, X (Twitter), Facebook, Telegram, Reddit and your portfolio. Free, no signup, works on mobile and desktop.</p>
 
-      <div style="display:flex;gap:8px;margin-top:10px">
-        <button id="downloadBtn" class="btn ghost" title="Download badge as PNG"><i class="fa fa-download"></i>&nbsp; Download</button>
-        <button id="resetBtn" class="btn ghost" title="Reset">Reset</button>
-      </div>
-
-      <p class="help">Notes: Uses GitHub public API (60 requests/hour per IP for unauthenticated). If you see rate-limit errors try later or use a server-side proxy.</p>
-
-      <div class="share-links" aria-hidden="true">
-        <a id="twitterShare" href="#" target="_blank" rel="noopener noreferrer"><i class="fab fa-twitter"></i> Tweet</a>
-        <a id="fbShare" href="#" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook"></i> Share</a>
-        <a id="githubLink" href="https://github.com/TharVid" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> Creator</a>
+      <form class="search" id="searchForm" role="search" aria-label="Generate GitHub badge">
+        <div class="ico"><i class="fab fa-github" aria-hidden="true"></i></div>
+        <input id="username" type="text" placeholder="GitHub username (e.g. torvalds)" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" aria-label="GitHub username" />
+        <button type="submit" class="btn primary" id="searchBtn">
+          <i class="fa fa-wand-magic-sparkles" aria-hidden="true"></i>
+          Generate badge
+        </button>
+      </form>
+      <div class="examples" aria-label="Try examples">
+        <span>Try:</span>
+        <button class="chip" data-user="torvalds">torvalds</button>
+        <button class="chip" data-user="gaearon">gaearon</button>
+        <button class="chip" data-user="sindresorhus">sindresorhus</button>
+        <button class="chip" data-user="TharVid">TharVid</button>
       </div>
     </section>
 
-    <!-- Preview -->
-    <section class="preview-card" aria-labelledby="previewTitle">
-      <h2 id="previewTitle" style="margin:0 0 10px 0;font-size:1rem;color:#2b2b2b">Badge Preview</h2>
-
-      <div id="badge" class="badge" role="region" aria-live="polite" aria-label="Badge preview">
-        <!-- Avatar -->
-        <img id="avatarImg" class="avatar" src="images/github_logo.png" alt="avatar" />
-
-        <div class="role" id="roleText">Open Source Contributor</div>
-        <div class="display-name" id="nameText">GitHub</div>
-        <div class="bio" id="bioText">Bio here — proud contributor to open source.</div>
-
-        <div class="stats" id="statsRow" aria-hidden="true" style="margin-top:14px">
-          <div class="stat" id="followersStat"><i class="fa fa-users"></i> 0 followers</div>
-          <div class="stat" id="reposStat"><i class="fa fa-book"></i> 0 repos</div>
-          <div class="stat" id="starsStat"><i class="fa fa-star"></i> 0 stars</div>
+    <main class="grid">
+      <section class="badge-wrap" aria-labelledby="previewTitle">
+        <div class="badge-wrap-head">
+          <h2 id="previewTitle">Badge preview</h2>
+          <span class="status" id="statusPill"><span class="pulse"></span> Live from github.com</span>
         </div>
 
-        <div class="repos" id="repoList" aria-live="polite" style="width:100%;margin-top:16px">
-          <!-- repos inserted here -->
-          <div class="small-note" id="repoNote">No user searched yet — enter a username on the left.</div>
+        <article id="badge" class="badge" aria-live="polite">
+          <div class="badge-ribbon"><i class="fa fa-code-branch" aria-hidden="true"></i> Open Source Contributor</div>
+          <div class="badge-header">
+            <div class="avatar-wrap">
+              <img id="avatarImg" class="avatar" src="images/github_logo.png" alt="GitHub avatar" crossorigin="anonymous" />
+            </div>
+            <div class="badge-identity">
+              <p class="name" id="nameText">Your name here</p>
+              <p class="handle" id="handleText">@github</p>
+            </div>
+          </div>
+          <p class="badge-bio" id="bioText">Search a GitHub username above and we'll build a badge with real stats — followers, repos, stars and top projects.</p>
+
+          <div class="stats" id="statsRow">
+            <div class="stat"><div class="num" id="followersNum">—</div><div class="lbl">Followers</div></div>
+            <div class="stat"><div class="num" id="reposNum">—</div><div class="lbl">Public repos</div></div>
+            <div class="stat"><div class="num" id="starsNum">—</div><div class="lbl">Total stars</div></div>
+          </div>
+
+          <blockquote class="tribute" id="tribute">
+            <i class="fa fa-quote-left" aria-hidden="true"></i>
+            <p>Open source runs on people like you. Thank you for building in public — every commit, every issue, every late-night fix is how the web gets better.</p>
+          </blockquote>
+
+          <div class="footline">
+            <span>tharvid.in/Open-Source-Badge-Generator</span>
+            <span id="dateStamp"></span>
+          </div>
+        </article>
+
+        <div id="stateSlot" style="margin-top:14px"></div>
+      </section>
+
+      <aside class="side">
+        <div class="side-card">
+          <h3>Actions</h3>
+          <p class="hint">Save a PNG for posts, or copy the live link so anyone can view this badge.</p>
+          <div class="action-row">
+            <button class="btn primary" id="downloadBtn">
+              <i class="fa fa-download" aria-hidden="true"></i> Download PNG
+            </button>
+            <button class="btn ghost" id="copyLinkBtn">
+              <i class="fa fa-link" aria-hidden="true"></i> Copy link
+            </button>
+          </div>
+          <div class="link-row">
+            <input id="shareUrlInput" type="text" readonly aria-label="Shareable link" />
+            <button class="btn ghost icon-only" id="copyLinkIconBtn" aria-label="Copy link" title="Copy">
+              <i class="fa fa-copy" aria-hidden="true"></i>
+            </button>
+          </div>
+        </div>
+
+        <div class="side-card">
+          <h3>Share</h3>
+          <p class="hint">One tap — we'll open the app with a short message pre-filled.</p>
+          <div class="share-grid" id="shareGrid">
+            <button class="share-btn" data-kind="native" id="nativeShareBtn" hidden>
+              <span class="ico"><i class="fa fa-share-nodes" aria-hidden="true"></i></span>
+              <span>Share…</span>
+            </button>
+            <a class="share-btn" data-kind="linkedin" id="shareLinkedIn" target="_blank" rel="noopener noreferrer">
+              <span class="ico"><i class="fab fa-linkedin-in" aria-hidden="true"></i></span>
+              <span>LinkedIn</span>
+            </a>
+            <a class="share-btn" data-kind="whatsapp" id="shareWhatsApp" target="_blank" rel="noopener noreferrer">
+              <span class="ico"><i class="fab fa-whatsapp" aria-hidden="true"></i></span>
+              <span>WhatsApp</span>
+            </a>
+            <a class="share-btn" data-kind="x" id="shareX" target="_blank" rel="noopener noreferrer">
+              <span class="ico"><i class="fab fa-x-twitter" aria-hidden="true"></i></span>
+              <span>X</span>
+            </a>
+            <a class="share-btn" data-kind="facebook" id="shareFacebook" target="_blank" rel="noopener noreferrer">
+              <span class="ico"><i class="fab fa-facebook-f" aria-hidden="true"></i></span>
+              <span>Facebook</span>
+            </a>
+            <a class="share-btn" data-kind="telegram" id="shareTelegram" target="_blank" rel="noopener noreferrer">
+              <span class="ico"><i class="fab fa-telegram" aria-hidden="true"></i></span>
+              <span>Telegram</span>
+            </a>
+            <a class="share-btn" data-kind="reddit" id="shareReddit" target="_blank" rel="noopener noreferrer">
+              <span class="ico"><i class="fab fa-reddit-alien" aria-hidden="true"></i></span>
+              <span>Reddit</span>
+            </a>
+            <a class="share-btn" data-kind="email" id="shareEmail">
+              <span class="ico"><i class="fa fa-envelope" aria-hidden="true"></i></span>
+              <span>Email</span>
+            </a>
+            <button class="share-btn" data-kind="copy" id="shareCopy">
+              <span class="ico"><i class="fa fa-link" aria-hidden="true"></i></span>
+              <span>Copy link</span>
+            </button>
+          </div>
+        </div>
+      </aside>
+    </main>
+
+    <section class="section" aria-labelledby="featuresTitle">
+      <h2 id="featuresTitle">Why this GitHub badge generator</h2>
+      <p>Everything you need to celebrate your open source work and share it across social platforms — in one free web app.</p>
+      <div class="features">
+        <div class="feature">
+          <div class="f-ico"><i class="fab fa-github" aria-hidden="true"></i></div>
+          <h3>Live GitHub data</h3>
+          <p>Pulls followers, public repos, stars and top projects straight from the GitHub public API.</p>
+        </div>
+        <div class="feature">
+          <div class="f-ico"><i class="fa fa-mobile-screen" aria-hidden="true"></i></div>
+          <h3>Mobile &amp; desktop ready</h3>
+          <p>Responsive design that looks great on phones, tablets and laptops — your badge is pixel-perfect everywhere.</p>
+        </div>
+        <div class="feature">
+          <div class="f-ico"><i class="fa fa-share-nodes" aria-hidden="true"></i></div>
+          <h3>One-tap sharing</h3>
+          <p>Share to LinkedIn, WhatsApp, X, Facebook, Telegram, Reddit or email — or use your phone's native share sheet.</p>
+        </div>
+        <div class="feature">
+          <div class="f-ico"><i class="fa fa-download" aria-hidden="true"></i></div>
+          <h3>High-res PNG export</h3>
+          <p>Download a 2× resolution PNG of your contributor badge for posts, slides and portfolios.</p>
+        </div>
+        <div class="feature">
+          <div class="f-ico"><i class="fa fa-link" aria-hidden="true"></i></div>
+          <h3>Deep-link any profile</h3>
+          <p>Every badge gets its own URL (<code>?user=username</code>) so anyone can view it without searching again.</p>
+        </div>
+        <div class="feature">
+          <div class="f-ico"><i class="fa fa-lock-open" aria-hidden="true"></i></div>
+          <h3>Free &amp; open source</h3>
+          <p>No signup, no tracking, no paywall. Fork it, tweak it, ship your own version.</p>
         </div>
       </div>
     </section>
-  </main>
 
-  <!-- html2canvas will be loaded dynamically if not present -->
+    <section class="section" aria-labelledby="howTitle">
+      <h2 id="howTitle">How to create your open source badge</h2>
+      <div class="steps">
+        <div class="step"><h3>Enter a GitHub username</h3><p>Type any public GitHub handle in the search box above — yours or a friend's.</p></div>
+        <div class="step"><h3>Preview your badge</h3><p>We instantly build an Open Source Contributor card with real stats and top repos.</p></div>
+        <div class="step"><h3>Download or share</h3><p>Save the PNG, or tap LinkedIn, WhatsApp, X and friends to share the live link.</p></div>
+      </div>
+    </section>
+
+    <section class="section faq" aria-labelledby="faqTitle">
+      <h2 id="faqTitle">Frequently asked questions</h2>
+
+      <details>
+        <summary>Is the Open Source Badge Generator free?</summary>
+        <p>Yes — 100% free. No signup, no credit card, no ads. It's an open source project hosted on GitHub Pages.</p>
+      </details>
+      <details>
+        <summary>What data does the GitHub badge include?</summary>
+        <p>Your display name, handle, avatar, bio, follower count, public repo count and total stars across all your repositories — plus a short appreciation note. Clean and easy to share.</p>
+      </details>
+      <details>
+        <summary>Can I share the badge on LinkedIn and WhatsApp?</summary>
+        <p>Yes. The Share panel has one-tap buttons for LinkedIn, WhatsApp, X (Twitter), Facebook, Telegram, Reddit and email, plus a native share sheet on mobile.</p>
+      </details>
+      <details>
+        <summary>How do I download the badge as an image?</summary>
+        <p>Click <strong>Download PNG</strong>. We render a 2× resolution image of the badge card you can post anywhere.</p>
+      </details>
+      <details>
+        <summary>Does it work on mobile?</summary>
+        <p>Absolutely. The UI is mobile-first and the native share sheet is supported on iOS and Android browsers that implement the Web Share API.</p>
+      </details>
+      <details>
+        <summary>Why am I seeing a rate-limit error?</summary>
+        <p>GitHub allows 60 unauthenticated API requests per IP per hour. If you hit the limit, wait an hour and try again.</p>
+      </details>
+      <details>
+        <summary>Can I generate a badge for someone else?</summary>
+        <p>Yes — any public GitHub username works. Share the resulting link (e.g. <code>?user=torvalds</code>) with them.</p>
+      </details>
+    </section>
+
+    <footer class="bot">
+      <p>Made with <span aria-hidden="true">♡</span> by <a href="https://github.com/TharVid" target="_blank" rel="noopener noreferrer">TharVid</a> · Uses the public GitHub API · <a href="https://github.com/TharVid/Open-Source-Badge-Generator" target="_blank" rel="noopener noreferrer">Source on GitHub</a></p>
+    </footer>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
   <script>
   (function(){
-    // DOM refs
-    const inputEl = document.querySelector(".input_user") || document.getElementById('username');
-    const searchBtn = document.getElementById("searchBtn");
-    const downloadBtn = document.getElementById("downloadBtn");
-    const resetBtn = document.getElementById("resetBtn");
+    const $ = (id) => document.getElementById(id);
+    const searchForm = $('searchForm');
+    const inputEl = $('username');
+    const searchBtn = $('searchBtn');
+    const downloadBtn = $('downloadBtn');
+    const copyLinkBtn = $('copyLinkBtn');
+    const copyLinkIconBtn = $('copyLinkIconBtn');
+    const shareUrlInput = $('shareUrlInput');
+    const statusPill = $('statusPill');
+    const stateSlot = $('stateSlot');
+    const toast = $('toast');
 
-    const avatarImg = document.getElementById("avatarImg");
-    const nameText = document.getElementById("nameText");
-    const roleText = document.getElementById("roleText");
-    const bioText = document.getElementById("bioText");
-    const followersStat = document.getElementById("followersStat");
-    const reposStat = document.getElementById("reposStat");
-    const starsStat = document.getElementById("starsStat");
-    const repoList = document.getElementById("repoList");
+    const avatarImg = $('avatarImg');
+    const nameText = $('nameText');
+    const handleText = $('handleText');
+    const bioText = $('bioText');
+    const followersNum = $('followersNum');
+    const reposNum = $('reposNum');
+    const starsNum = $('starsNum');
+    const dateStamp = $('dateStamp');
 
-    const twitterShare = document.getElementById("twitterShare");
-    const fbShare = document.getElementById("fbShare");
-    const githubLink = document.getElementById("githubLink");
+    const shareLinkedIn = $('shareLinkedIn');
+    const shareWhatsApp = $('shareWhatsApp');
+    const shareX = $('shareX');
+    const shareFacebook = $('shareFacebook');
+    const shareTelegram = $('shareTelegram');
+    const shareReddit = $('shareReddit');
+    const shareEmail = $('shareEmail');
+    const shareCopy = $('shareCopy');
+    const nativeShareBtn = $('nativeShareBtn');
 
-    let lastUser = "";
+    let currentUser = null;
+    let currentPng = null;
 
-    // small helper
-    function safe(v){ return v === null || v === undefined ? "" : String(v); }
-    function clearBadge(){
-      avatarImg.src = "images/github_logo.png";
-      avatarImg.alt = "avatar";
-      nameText.textContent = "GitHub";
-      roleText.textContent = "Open Source Contributor";
-      bioText.textContent = "Bio here — proud contributor to open source.";
-      followersStat.textContent = "x followers";
-      reposStat.textContent = "0 repos";
-      starsStat.textContent = "0 stars";
-      repoList.innerHTML = '<div class="small-note" id="repoNote">No user searched yet — enter a username on the left.</div>';
-    }
+    const escapeHtml = (s) => String(s ?? '')
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
-    // show loading
-    function setLoading(on=true){
-      if(on){
-        repoList.innerHTML = '<div class="loading">Loading user and repositories…</div>';
-      }
-    }
+    const formatNumber = (n) => {
+      n = Number(n) || 0;
+      if (n >= 1_000_000) return (n / 1_000_000).toFixed(n % 1_000_000 === 0 ? 0 : 1) + 'M';
+      if (n >= 1_000) return (n / 1_000).toFixed(n % 1_000 === 0 ? 0 : 1) + 'k';
+      return String(n);
+    };
 
-    // fetch user + repos
+    const showToast = (msg) => {
+      toast.textContent = msg;
+      toast.classList.add('show');
+      clearTimeout(showToast._t);
+      showToast._t = setTimeout(() => toast.classList.remove('show'), 2000);
+    };
+
+    const setState = (html) => { stateSlot.innerHTML = html || ''; };
+
+    const setLiveStatus = (label, ok = true) => {
+      const style = ok ? '' : 'style="background:#ffb020;animation:none"';
+      statusPill.innerHTML = `<span class="pulse" ${style}></span> ${escapeHtml(label)}`;
+    };
+
+    const CANONICAL_BASE = 'https://tharvid.in/Open-Source-Badge-Generator/';
+    const isLocal = location.protocol === 'file:' || /^(localhost|127\.0\.0\.1|\[::1\])$/i.test(location.hostname);
+    const getShareUrl = (login) => {
+      const base = isLocal ? CANONICAL_BASE : (location.origin + location.pathname.replace(/index\.html?$/, ''));
+      if (!login) return base;
+      return base + '?user=' + encodeURIComponent(login);
+    };
+
+    dateStamp.textContent = new Date().toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' });
+
     async function fetchGitHub(username){
-      username = (username||"").trim();
-      if(!username){ alert("Please enter github user name"); inputEl.focus(); return; }
+      username = (username || '').trim().replace(/^@/, '');
+      if (!username) { inputEl.focus(); showToast('Enter a GitHub username'); return; }
+      if (!/^[a-zA-Z0-9]([a-zA-Z0-9-]{0,38})$/.test(username)) {
+        showToast('That doesn\u2019t look like a valid GitHub username');
+        return;
+      }
 
-      lastUser = username;
-      setLoading(true);
-
-      // GitHub rate limit note: unauthenticated = 60/hr per IP
-      const headers = { "Accept": "application/vnd.github.v3+json" };
+      searchBtn.disabled = true;
+      setState('<div class="loading"><i class="fa fa-circle-notch fa-spin"></i> &nbsp;Looking up <strong>' + escapeHtml(username) + '</strong>…</div>');
 
       try {
+        const headers = { 'Accept': 'application/vnd.github.v3+json' };
         const [userResp, reposResp] = await Promise.all([
           fetch(`https://api.github.com/users/${encodeURIComponent(username)}`, { headers }),
           fetch(`https://api.github.com/users/${encodeURIComponent(username)}/repos?per_page=100&sort=pushed`, { headers })
         ]);
 
-        if(userResp.status === 404){
-          clearBadge();
-          repoList.innerHTML = `<div class="error">User "<strong>${escapeHtml(username)}</strong>" not found.</div>`;
+        if (userResp.status === 404) {
+          setState(`<div class="error">We couldn\u2019t find <strong>${escapeHtml(username)}</strong> on GitHub.</div>`);
+          setLiveStatus('User not found', false);
           return;
         }
-        if(!userResp.ok){
-          throw new Error(`Failed to fetch user: ${userResp.status}`);
+        if (userResp.status === 403) {
+          setState('<div class="error">GitHub rate limit hit (60/hr for anonymous requests). Please try again later.</div>');
+          setLiveStatus('Rate limited', false);
+          return;
         }
-        if(!reposResp.ok){
-          // proceed with empty repos array if 404, else throw
-          if(reposResp.status !== 404) throw new Error(`Failed to fetch repos: ${reposResp.status}`);
-        }
+        if (!userResp.ok) throw new Error('User fetch failed: ' + userResp.status);
 
-        const userData = await userResp.json();
-        const reposData = await reposResp.json();
+        const user = await userResp.json();
+        const repos = reposResp.ok ? await reposResp.json() : [];
+        renderUser(user, Array.isArray(repos) ? repos : []);
+        setState('');
 
-        renderUser(userData, Array.isArray(reposData) ? reposData : []);
-      } catch(err){
+        const url = new URL(location.href);
+        url.searchParams.set('user', user.login);
+        history.replaceState(null, '', url.toString());
+
+        currentPng = null;
+      } catch (err) {
         console.error(err);
-        repoList.innerHTML = `<div class="error">Error while fetching data. Check console for details.</div>`;
+        setState('<div class="error">Something went wrong fetching that profile. Check your connection and try again.</div>');
+        setLiveStatus('Connection error', false);
+      } finally {
+        searchBtn.disabled = false;
       }
     }
 
-    // render user and top repos
     function renderUser(user, repos){
+      currentUser = user;
+
       avatarImg.src = user.avatar_url || 'images/github_logo.png';
-      avatarImg.alt = `${safe(user.login)} avatar`;
-      nameText.textContent = safe(user.name) || safe(user.login) || 'GitHub';
-      roleText.textContent = safe(user.login) ? 'Open Source Contributor' : 'Open Source Enthusiast';
-      bioText.textContent = safe(user.bio) || 'No bio available';
+      avatarImg.alt = `${user.login} GitHub avatar`;
+      nameText.textContent = user.name || user.login;
+      handleText.innerHTML = `<a href="https://github.com/${encodeURIComponent(user.login)}" target="_blank" rel="noopener noreferrer">@${escapeHtml(user.login)}</a>`;
+      bioText.textContent = user.bio || 'Proud member of the open source community.';
 
-      followersStat.innerHTML = `<i class="fa fa-users"></i> ${safe(user.followers)} followers`;
-      reposStat.innerHTML = `<i class="fa fa-book"></i> ${safe(user.public_repos)} repos`;
+      const totalStars = repos.reduce((s, r) => s + (r.stargazers_count || 0), 0);
+      followersNum.textContent = formatNumber(user.followers);
+      reposNum.textContent = formatNumber(user.public_repos);
+      starsNum.textContent = formatNumber(totalStars);
 
-      // compute total stars across fetched repos
-      const totalStars = (repos || []).reduce((s,r)=> s + (r.stargazers_count||0), 0);
-      starsStat.innerHTML = `<i class="fa fa-star"></i> ${totalStars} stars`;
-
-      // build repo list: sort by stars desc and show top 8
-      if(!Array.isArray(repos) || repos.length === 0){
-        repoList.innerHTML = '<div class="small-note">This user has no public repositories.</div>';
-        return;
-      }
-
-      const sorted = repos.slice().sort((a,b) => (b.stargazers_count||0) - (a.stargazers_count||0));
-      const top = sorted.slice(0, 8);
-
-      repoList.innerHTML = top.map(r => {
-        return `
-          <div class="repo-item">
-            <div class="repo-left">
-              <a href="${r.html_url}" target="_blank" rel="noopener noreferrer">${escapeHtml(r.name)}</a>
-              ${r.description ? `<div class="repo-desc">${escapeHtml(r.description)}</div>` : ''}
-              <div class="repo-meta">
-                ${r.language ? `<span>${escapeHtml(r.language)}</span>` : ''}
-                &nbsp; • &nbsp; ★ ${r.stargazers_count || 0}  &nbsp; • &nbsp; Forks ${r.forks_count || 0}
-              </div>
-            </div>
-            <div style="text-align:right;color:var(--muted);font-size:0.85rem">
-              ${new Date(r.pushed_at).toLocaleDateString()}
-            </div>
-          </div>
-        `;
-      }).join('');
-
-      // update share links
-      const page = encodeURIComponent(`https://github.com/${user.login}`);
-      twitterShare.href = `https://twitter.com/intent/tweet?text=${encodeURIComponent('I generated an open-source badge for')}%20${encodeURIComponent(user.login)}&url=${page}&hashtags=opensource`;
-      fbShare.href = `https://www.facebook.com/sharer/sharer.php?u=${page}`;
-      githubLink.href = `https://github.com/${user.login}`;
+      updateShareTargets(user);
+      setLiveStatus(`@${user.login}`, true);
+      document.title = `${user.name || user.login}'s Open Source Badge · GitHub Contributor`;
     }
 
-    // Download using html2canvas
-    function ensureHtml2CanvasAndCapture(){
-      if(typeof html2canvas === 'undefined'){
-        // load CDN
+    function updateShareTargets(user){
+      const login = user.login;
+      const url = getShareUrl(login);
+      const rocket = '\u{1F680}';
+      const short = `My Open Source Contributor badge ${rocket}`;
+      const tweet = `My Open Source Contributor badge for @${login} ${rocket}`;
+
+      shareUrlInput.value = url;
+      const enc = encodeURIComponent;
+
+      shareLinkedIn.href = `https://www.linkedin.com/sharing/share-offsite/?url=${enc(url)}`;
+      shareWhatsApp.href = `https://wa.me/?text=${enc(short + ' ' + url)}`;
+      shareX.href = `https://twitter.com/intent/tweet?text=${enc(tweet)}&url=${enc(url)}&hashtags=opensource,github`;
+      shareFacebook.href = `https://www.facebook.com/sharer/sharer.php?u=${enc(url)}`;
+      shareTelegram.href = `https://t.me/share/url?url=${enc(url)}&text=${enc(short)}`;
+      shareReddit.href = `https://www.reddit.com/submit?url=${enc(url)}&title=${enc('Open Source Contributor badge for @' + login)}`;
+      shareEmail.href = `mailto:?subject=${enc('Open Source Badge — @' + login)}&body=${enc(short + '\n' + url)}`;
+
+      if (navigator.share) nativeShareBtn.hidden = false;
+    }
+
+    async function copyToClipboard(text){
+      if (!text) return;
+      try {
+        await navigator.clipboard.writeText(text);
+        showToast('Link copied to clipboard');
+      } catch {
+        shareUrlInput.select();
+        document.execCommand('copy');
+        showToast('Link copied');
+      }
+    }
+
+    async function nativeShare(){
+      if (!currentUser) { showToast('Generate a badge first'); return; }
+      const url = getShareUrl(currentUser.login);
+      const text = `Open Source Badge for @${currentUser.login}`;
+
+      try {
+        const blob = await renderBadgePng();
+        if (blob && navigator.canShare) {
+          const file = new File([blob], `${currentUser.login}-open-source-badge.png`, { type: 'image/png' });
+          const payload = { files: [file], title: text, text, url };
+          if (navigator.canShare(payload)) {
+            await navigator.share(payload);
+            return;
+          }
+        }
+      } catch (_) { /* fall through */ }
+
+      try {
+        await navigator.share({ title: text, text, url });
+      } catch (e) {
+        if (e && e.name !== 'AbortError') showToast('Sharing cancelled');
+      }
+    }
+
+    function loadHtml2Canvas(){
+      return new Promise((resolve, reject) => {
+        if (window.html2canvas) return resolve(window.html2canvas);
         const s = document.createElement('script');
         s.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js';
         s.crossOrigin = 'anonymous';
         s.referrerPolicy = 'no-referrer';
-        s.onload = () => captureBadge();
-        s.onerror = () => alert('Failed to load html2canvas from CDN.');
+        s.onload = () => resolve(window.html2canvas);
+        s.onerror = () => reject(new Error('html2canvas failed to load'));
         document.head.appendChild(s);
-      } else {
-        captureBadge();
-      }
-    }
-
-    function captureBadge(){
-      const badge = document.getElementById('badge');
-      downloadBtn.disabled = true;
-      downloadBtn.textContent = 'Preparing...';
-      html2canvas(badge, { scale: 2, useCORS: true, backgroundColor: null }).then(canvas=>{
-        canvas.toBlob(blob=>{
-          if(!blob){ alert('Export failed'); downloadBtn.disabled=false; downloadBtn.textContent='Download'; return; }
-          const url = URL.createObjectURL(blob);
-          const a = document.createElement('a');
-          a.href = url;
-          a.download = `${(lastUser||'badge').replace(/\s+/g,'_')}_badge.png`;
-          document.body.appendChild(a);
-          a.click();
-          a.remove();
-          URL.revokeObjectURL(url);
-          downloadBtn.disabled = false;
-          downloadBtn.textContent = 'Download';
-        }, 'image/png');
-      }).catch(err=>{
-        console.error(err);
-        alert('Export failed — see console');
-        downloadBtn.disabled = false;
-        downloadBtn.textContent = 'Download';
       });
     }
 
-    // simple escaping
-    function escapeHtml(s){
-      if(!s) return '';
-      return String(s)
-        .replace(/&/g,'&amp;')
-        .replace(/</g,'&lt;')
-        .replace(/>/g,'&gt;')
-        .replace(/"/g,'&quot;');
+    async function renderBadgePng(){
+      if (currentPng) return currentPng;
+      const h2c = await loadHtml2Canvas();
+      const node = document.getElementById('badge');
+      const canvas = await h2c(node, { scale: 2, useCORS: true, backgroundColor: '#ffffff', logging: false });
+      return await new Promise((resolve) => canvas.toBlob(resolve, 'image/png'));
     }
 
-    // events
-    searchBtn.addEventListener('click', ()=> fetchGitHub(inputEl.value));
-    inputEl.addEventListener('keyup', (e)=> { if(e.key === 'Enter') fetchGitHub(inputEl.value); });
-    downloadBtn.addEventListener('click', ensureHtml2CanvasAndCapture);
-    resetBtn.addEventListener('click', ()=> { inputEl.value = ''; clearBadge(); });
+    async function downloadPng(){
+      if (!currentUser) { showToast('Generate a badge first'); inputEl.focus(); return; }
+      const original = downloadBtn.innerHTML;
+      downloadBtn.disabled = true;
+      downloadBtn.innerHTML = '<i class="fa fa-circle-notch fa-spin"></i> Rendering…';
+      try {
+        const blob = await renderBadgePng();
+        currentPng = blob;
+        if (!blob) throw new Error('Render produced no blob');
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `${currentUser.login}-open-source-badge.png`;
+        document.body.appendChild(a); a.click(); a.remove();
+        URL.revokeObjectURL(url);
+        showToast('Saved as PNG');
+      } catch (err) {
+        console.error(err);
+        showToast('Export failed — check console');
+      } finally {
+        downloadBtn.innerHTML = original;
+        downloadBtn.disabled = false;
+      }
+    }
 
-    // initial state
-    clearBadge();
+    searchForm.addEventListener('submit', (e) => { e.preventDefault(); fetchGitHub(inputEl.value); });
+    document.querySelectorAll('.chip').forEach(c =>
+      c.addEventListener('click', () => { inputEl.value = c.dataset.user; fetchGitHub(c.dataset.user); })
+    );
 
-    // allow calling programmatically: window.generateBadge('username')
-    window.generateBadge = (username) => { inputEl.value = username; fetchGitHub(username); };
+    downloadBtn.addEventListener('click', downloadPng);
+    copyLinkBtn.addEventListener('click', () => copyToClipboard(shareUrlInput.value || getShareUrl(currentUser?.login)));
+    copyLinkIconBtn.addEventListener('click', () => copyToClipboard(shareUrlInput.value || getShareUrl(currentUser?.login)));
+    shareCopy.addEventListener('click', () => copyToClipboard(shareUrlInput.value || getShareUrl(currentUser?.login)));
+    nativeShareBtn.addEventListener('click', nativeShare);
 
+    document.querySelectorAll('.share-btn[target="_blank"]').forEach(a => {
+      a.addEventListener('click', (e) => {
+        if (!currentUser) {
+          e.preventDefault();
+          showToast('Generate a badge first');
+          inputEl.focus();
+        }
+      });
+    });
+
+    shareUrlInput.value = getShareUrl();
+
+    const params = new URLSearchParams(location.search);
+    const initial = params.get('user') || params.get('u');
+    if (initial) {
+      inputEl.value = initial;
+      fetchGitHub(initial);
+    } else {
+      setLiveStatus('Waiting for a username', false);
+    }
+
+    window.generateBadge = (u) => { inputEl.value = u; fetchGitHub(u); };
   })();
   </script>
 </body>

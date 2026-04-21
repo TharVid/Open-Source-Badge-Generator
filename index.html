@@ -701,7 +701,7 @@
 
         const user = await userResp.json();
         const repos = reposResp.ok ? await reposResp.json() : [];
-        renderUser(user, Array.isArray(repos) ? repos : []);
+        await renderUser(user, Array.isArray(repos) ? repos : []);
         setState('');
 
         const url = new URL(location.href);
@@ -718,10 +718,26 @@
       }
     }
 
-    function renderUser(user, repos){
+    async function toDataUrl(url){
+      const resp = await fetch(url, { mode: 'cors' });
+      if (!resp.ok) throw new Error('avatar fetch ' + resp.status);
+      const blob = await resp.blob();
+      return await new Promise((res, rej) => {
+        const r = new FileReader();
+        r.onload = () => res(r.result);
+        r.onerror = rej;
+        r.readAsDataURL(blob);
+      });
+    }
+
+    async function renderUser(user, repos){
       currentUser = user;
 
-      avatarImg.src = user.avatar_url || 'images/github_logo.png';
+      try {
+        avatarImg.src = await toDataUrl(user.avatar_url);
+      } catch (_) {
+        avatarImg.src = user.avatar_url || 'images/github_logo.png';
+      }
       avatarImg.alt = `${user.login} GitHub avatar`;
       nameText.textContent = user.name || user.login;
       handleText.innerHTML = `<a href="https://github.com/${encodeURIComponent(user.login)}" target="_blank" rel="noopener noreferrer">@${escapeHtml(user.login)}</a>`;
